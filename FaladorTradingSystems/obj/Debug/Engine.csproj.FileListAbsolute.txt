@@ -1,0 +1,9 @@
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\bin\Debug\FaladorTradingSystems.dll
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\bin\Debug\FaladorTradingSystems.pdb
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\bin\Debug\ClassLibrary1.dll
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\bin\Debug\ClassLibrary1.pdb
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\obj\Debug\Engine.csprojAssemblyReference.cache
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\obj\Debug\Engine.csproj.CoreCompileInputs.cache
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\obj\Debug\Engine.csproj.CopyComplete
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\obj\Debug\FaladorTradingSystems.dll
+C:\Users\joelo\code\Falador_Trading_Systems\FaladorTradingSystems\obj\Debug\FaladorTradingSystems.pdb

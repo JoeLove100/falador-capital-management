@@ -1,0 +1,6 @@
+C:\Users\joelo\code\Falador_Trading_Systems\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\joelo\code\Falador_Trading_Systems\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\joelo\code\Falador_Trading_Systems\ClassLibrary1\obj\Debug\Utils.csprojAssemblyReference.cache
+C:\Users\joelo\code\Falador_Trading_Systems\ClassLibrary1\obj\Debug\Utils.csproj.CoreCompileInputs.cache
+C:\Users\joelo\code\Falador_Trading_Systems\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\joelo\code\Falador_Trading_Systems\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

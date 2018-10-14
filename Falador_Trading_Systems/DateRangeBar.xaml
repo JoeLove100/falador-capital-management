@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="FaladorTradingSystems.UserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tlkt="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="80">
+            Start date
+        </TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="0">
+            End date
+        </TextBlock>
+        <tlkt:DateTimeUpDown Grid.Column="1" Grid.Row="0"
+                             Minimum="{Binding MinDateStart}"
+                             Maximum="{Binding MaxDateStart}"
+                             Name="DateTimeUpDownStart"
+                             Format="ShortDate">
+        </tlkt:DateTimeUpDown>
+        <tlkt:DateTimeUpDown Grid.Column="3" Grid.Row="0"
+                             Minimum="{Binding MinDateEnd}"
+                             Maximum="{Binding MaxDateEnd}"
+                             Name="DateTimeUpDownEnd"
+                             Format="ShortDate">
+        </tlkt:DateTimeUpDown>
+        <tlkt:RangeSlider Grid.Column="4" Grid.Row="0"
+                          Name="DateRangeSlider">
+        </tlkt:RangeSlider>
+
+
+
+
+    </Grid>
+</UserControl>
