@@ -24,7 +24,7 @@ namespace FaladorTradingSystems
     /// <summary>
     /// Interaction logic for LineChartPanel.xaml
     /// </summary>
-    public partial class LineChartPanel : UserControl
+    public partial class LineChartPanel : ObservableControl
     {
         #region constructor
 
@@ -37,9 +37,22 @@ namespace FaladorTradingSystems
 
         #region properties
 
+        private string[] _labels;
+
         public Func<double, string> Formatter { get; set; }
         public SeriesCollection Series { get; set; }
-        public string[] Labels { get; set; }
+        public string[] Labels
+        {
+            get
+            {
+                return _labels;
+            }
+            set
+            {
+                _labels = value;
+                OnPropertyChanged("Labels");
+            }
+        }
 
         private  AssetPriceSeriesCollection _seriesCollection { get; set; }
         private string _selectedSeries => (string) ComboBoxTicker.SelectedItem;
@@ -59,8 +72,8 @@ namespace FaladorTradingSystems
             }
 
             ComboBoxTicker.SelectedIndex = 1;
+            DataContext = this;
             InitialiseDateRangeControl();
-            //DataContext = this;
             AddEventHandlers();
         }
 
@@ -72,8 +85,10 @@ namespace FaladorTradingSystems
             AssetPriceSeries priceSeries = selectedSeries.GetSubset(selectedRange);
 
             Labels = GetDateArray(priceSeries.Keys.ToList());
+            OnPropertyChanged("Labels");
             Series.Clear();
             Series.Add( GetPriceDataSeries(priceSeries.Values.ToList()));
+
             Formatter = value => String.Format("{0:0,0}", value);
         }
 
@@ -119,7 +134,7 @@ namespace FaladorTradingSystems
         private void AddEventHandlers()
         {
             ComboBoxTicker.SelectionChanged += ReplotChart;
-            DateRangeControl.SettingsChangedEvent += ReplotChart;
+            DateRangeControl.AssumptionChanged += ReplotChart;
                 
         }
 

@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="FaladorTradingSystems.UserControl"
+﻿<local:ObservableControl x:Class="FaladorTradingSystems.DateRangeBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tlkt="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:local="clr-namespace:FaladorTradingSystems"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
     <Grid>
@@ -39,9 +40,5 @@
         <tlkt:RangeSlider Grid.Column="4" Grid.Row="0"
                           Name="DateRangeSlider">
         </tlkt:RangeSlider>
-
-
-
-
     </Grid>
-</UserControl>
+</local:ObservableControl>

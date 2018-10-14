@@ -16,7 +16,7 @@ namespace FaladorTradingSystems
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        protected void OnPropertyChanged(string prop)
+        public void OnPropertyChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }

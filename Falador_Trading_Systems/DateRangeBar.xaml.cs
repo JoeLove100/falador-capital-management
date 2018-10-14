@@ -25,7 +25,7 @@ namespace FaladorTradingSystems
 
         public DateRangeBar()
         {
-
+            InitializeComponent();
         }
 
         #endregion
