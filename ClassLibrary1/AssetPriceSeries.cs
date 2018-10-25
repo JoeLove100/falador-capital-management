@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-    public class AssetPriceSeries : SortedDictionary<DateTime, double>
+    public class AssetPriceSeries : SortedDictionary<DateTime, double> , IIsSameAs
     {
 
         #region constructors
@@ -15,7 +15,7 @@ namespace Utils
             Name = name;
         }
 
-        public AssetPriceSeries(List<DateTime> dates, List<double> assetPrices, string name)
+        public AssetPriceSeries(IList<DateTime> dates, IList<double> assetPrices, string name)
         {
             Name = name;
             AddDataToSeries(dates, assetPrices);
@@ -33,7 +33,7 @@ namespace Utils
 
         #region methods
 
-        public void AddDataToSeries(List<DateTime> dates, List<double> assetPrices)
+        public void AddDataToSeries(IList<DateTime> dates, IList<double> assetPrices)
         {
             for(int i =0; i < dates.Count; i++)
             {
@@ -43,6 +43,12 @@ namespace Utils
 
         public AssetPriceSeries GetSubset(DateRange range)
         {
+
+            if(range.Start < FirstDate || range.End > LastDate)
+            {
+                throw new ArgumentOutOfRangeException("date range is not a subset of the dates in this series");
+            }
+
             var output = new AssetPriceSeries(Name);
             var dates = new List<DateTime>();
             var prices = new List<double>();
@@ -62,5 +68,18 @@ namespace Utils
         }
 
         #endregion
+
+        #region implementations
+
+        public bool IsSameAs(IIsSameAs comparator)
+        {
+            AssetPriceSeries comparison = comparator as AssetPriceSeries;
+            if (comparison is null) return false;
+
+            if (Name != comparison.Name) return false;
+            return Compare.AreSameAs((IDictionary<DateTime, double>) this, (IDictionary<DateTime, double>) comparison);
+        }
+
+        #endregion 
     }
 }

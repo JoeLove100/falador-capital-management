@@ -22,7 +22,7 @@ namespace Engine
 
         private static AssetPriceSeriesCollection ConvertToAssetPriceSeries(List<string> rawDataFromCsv)
         {
-            string[] seriesNames = GetFormattedSeriesNames(rawDataFromCsv[0].Split(','));
+            string[] seriesNames = (string[]) GetFormattedSeriesNames(rawDataFromCsv[0].Split(','));
             List<DateTime> dates = new List<DateTime>();
             var output = new AssetPriceSeriesCollection();
             
@@ -58,7 +58,7 @@ namespace Engine
         }
 
 
-        private static string[] GetFormattedSeriesNames(string[] names)
+        private static IList<string> GetFormattedSeriesNames(IList<string> names)
         {
             var output = new List<string>();
 

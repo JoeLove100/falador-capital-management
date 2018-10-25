@@ -9,11 +9,6 @@ namespace Utils
 {
     public class CsvReader
     {
-        public CsvReader()
-        {
-
-        }
-
 
         public static List<string> ReadListFromCsv(string csvFilePath)
         {
