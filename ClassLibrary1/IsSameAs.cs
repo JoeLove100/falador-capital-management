@@ -29,13 +29,26 @@ namespace Utils
             if (dictOne is null || dictTwo is null) return false;
             if (dictOne.Count != dictTwo.Count) return false;
 
-            var valueComparer = EqualityComparer<TValue>.Default;
 
-            foreach(KeyValuePair<TKey, TValue> kvp in dictOne)
+            if (typeof(IIsSameAs).IsAssignableFrom(typeof(TValue)))
             {
-                TValue valueTwo;
-                if (!dictTwo.TryGetValue(kvp.Key, out valueTwo)) return false;
-                if (!valueComparer.Equals(kvp.Value, valueTwo)) return false;
+                foreach (KeyValuePair<TKey, TValue> kvp in dictOne)
+                {
+                    TValue valueTwo;
+                    if (!dictTwo.TryGetValue(kvp.Key, out valueTwo)) return false;
+                    if (!((IIsSameAs)valueTwo).IsSameAs((IIsSameAs)kvp.Value)) return false;
+                }
+            }
+            else
+            {
+                var valueComparer = EqualityComparer<TValue>.Default;
+
+                foreach (KeyValuePair<TKey, TValue> kvp in dictOne)
+                {
+                    TValue valueTwo;
+                    if (!dictTwo.TryGetValue(kvp.Key, out valueTwo)) return false;
+                    if (!valueComparer.Equals(kvp.Value, valueTwo)) return false;
+                }
             }
 
             return true;

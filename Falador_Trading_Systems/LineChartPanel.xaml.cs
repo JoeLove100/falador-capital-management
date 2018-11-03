@@ -54,19 +54,19 @@ namespace FaladorTradingSystems
             }
         }
 
-        private  AssetPriceSeriesCollection _seriesCollection { get; set; }
+        private  MarketData _seriesCollection { get; set; }
         private string _selectedSeries => (string) ComboBoxTicker.SelectedItem;
 
         #endregion 
 
         #region public methods
 
-        public void InitialiseChart(AssetPriceSeriesCollection collection)
+        public void InitialiseChart(MarketData collection)
         {
             _seriesCollection = collection;
             Series = new SeriesCollection();
 
-            foreach(AssetPriceSeries series in _seriesCollection)
+            foreach(AssetDataSeries series in _seriesCollection)
             {
                 ComboBoxTicker.Items.Add(series.Name);
             }
@@ -80,14 +80,14 @@ namespace FaladorTradingSystems
 
         public void PlotLineChart()
         {
-            AssetPriceSeries selectedSeries = _seriesCollection[_selectedSeries];
+            AssetDataSeries selectedSeries = _seriesCollection[_selectedSeries];
             DateRange selectedRange = DateRangeControl.GetSettings();
-            AssetPriceSeries priceSeries = selectedSeries.GetSubset(selectedRange);
+            AssetDataSeries priceSeries = selectedSeries.GetSubset(selectedRange);
 
             Labels = GetDateArray(priceSeries.Keys.ToList());
             OnPropertyChanged("Labels");
             Series.Clear();
-            Series.Add( GetPriceDataSeries(priceSeries.Values.ToList()));
+            Series.Add( GetPriceDataSeries(priceSeries.GetPricesInOrder()));
 
             Formatter = value => String.Format("{0:0,0}", value);
         }
@@ -99,7 +99,7 @@ namespace FaladorTradingSystems
 
         private void InitialiseDateRangeControl()
         {
-            AssetPriceSeries series = _seriesCollection[_selectedSeries];
+            AssetDataSeries series = _seriesCollection[_selectedSeries];
             DateRange range = new DateRange(series.FirstDate, series.LastDate);
             DateRangeControl.InitialiseControls(range);
         }

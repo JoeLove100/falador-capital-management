@@ -12,23 +12,23 @@ namespace Engine
     {
         #region methods
 
-        public static AssetPriceSeriesCollection LoadData(string dataFileLocation)
+        public static MarketData LoadData(string dataFileLocation)
         {
             List<string> dataFromCsv = CsvReader.ReadListFromCsv(dataFileLocation);
-            AssetPriceSeriesCollection output = ConvertToAssetPriceSeries(dataFromCsv);
+            MarketData output = ConvertToAssetPriceSeries(dataFromCsv);
 
             return output;
         }
 
-        private static AssetPriceSeriesCollection ConvertToAssetPriceSeries(List<string> rawDataFromCsv)
+        private static MarketData ConvertToAssetPriceSeries(List<string> rawDataFromCsv)
         {
             string[] seriesNames = (string[]) GetFormattedSeriesNames(rawDataFromCsv[0].Split(','));
             List<DateTime> dates = new List<DateTime>();
-            var output = new AssetPriceSeriesCollection();
+            var output = new MarketData();
             
             for(int i =1; i < seriesNames.Length; i++)
             {
-                AssetPriceSeries series = new AssetPriceSeries(seriesNames[i]);
+                AssetDataSeries series = new AssetDataSeries(seriesNames[i]);
                 output.Add(series);
             }    
 

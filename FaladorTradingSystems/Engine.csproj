@@ -42,6 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetPriceDataLoader.cs" />
+    <Compile Include="DataHandling\EventQueue.cs" />
+    <Compile Include="DataHandling\HistoricSeriesDataHandler.cs" />
+    <Compile Include="DataHandling\IDataHandler.cs" />
+    <Compile Include="Events\EventType.cs" />
+    <Compile Include="Events\FillEvent.cs" />
+    <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Events\MarketEvent.cs" />
+    <Compile Include="Events\SignalDirection.cs" />
+    <Compile Include="Events\SignalEvent.cs" />
+    <Compile Include="Events\TradeEvent.cs" />
     <Compile Include="ModelEngine.cs" />
     <Compile Include="ProjectParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,5 +62,6 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

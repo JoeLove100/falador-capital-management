@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssetPriceSeries.cs" />
-    <Compile Include="AssetPriceSeriesCollection.cs" />
+    <Compile Include="AssetDataSeries.cs" />
+    <Compile Include="MarketData.cs" />
+    <Compile Include="Bar.cs" />
     <Compile Include="CsvReader.cs" />
     <Compile Include="DateRange.cs" />
     <Compile Include="IsSameAs.cs" />

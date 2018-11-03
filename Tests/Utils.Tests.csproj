@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssetPriceSeries_Test.cs" />
+    <Compile Include="AssetDataSeries_Test.cs" />
+    <Compile Include="Bar_Test.cs" />
     <Compile Include="IsSameAs_Test.cs" />
+    <Compile Include="MarketData_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

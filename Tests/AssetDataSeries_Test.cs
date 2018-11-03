@@ -9,7 +9,7 @@ using Utils;
 namespace Tests
 {
     [TestClass()]
-    public class AssetPriceSeries_Test
+    public class AssetDataSeries_Test
     {
         [TestMethod()]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
@@ -23,13 +23,15 @@ namespace Tests
 
             DateTime[] dates = new DateTime[6];
             double[] values = new double[] { 1, 2, 3, 4, 5, 6 };
+            Bar[] bars = new Bar[6];
 
             for (int i = 1; i < 7; i++)
             {
                 dates[i - 1] = new DateTime(2018, i, 15);
+                bars[i - 1] = new Bar(values[i-1]);
             }
 
-            AssetPriceSeries series = new AssetPriceSeries(dates, values, "test");
+            AssetDataSeries series = new AssetDataSeries(dates, bars, "test");
 
             //act
             series.GetSubset(rangeLow);
@@ -53,13 +55,15 @@ namespace Tests
 
             DateTime[] dates = new DateTime[6];
             double[] values = new double[] { 1, 2, 3, 4, 5, 6 };
+            Bar[] bars = new Bar[6];
 
             for (int i = 1; i < 7; i++)
             {
                 dates[i - 1] = new DateTime(2018, i, 15);
+                bars[i - 1] = new Bar(values[i-1]);
             }
 
-            AssetPriceSeries series = new AssetPriceSeries(dates, values, "test");
+            AssetDataSeries series = new AssetDataSeries(dates, bars, "test");
 
             //act
             series.GetSubset(rangeHigh);
@@ -82,23 +86,25 @@ namespace Tests
 
             DateTime[] dates = new DateTime[6];
             double[] values = new double[] { 1, 2, 3, 4, 5, 6 };
+            Bar[] bars = new Bar[6];
 
             for (int i = 1; i < 7; i++)
             {
                 dates[i - 1] = new DateTime(2018, i, 15);
+                bars[i - 1] = new Bar(values[i-1]);
             }
 
-            AssetPriceSeries series = new AssetPriceSeries(dates, values, "test");
+            AssetDataSeries series = new AssetDataSeries(dates, bars, "test");
 
-            AssetPriceSeries expectedSubset = new AssetPriceSeries("test");
+            AssetDataSeries expectedSubset = new AssetDataSeries("test");
 
             for (int i = 1; i < 5; i++)
             {
-                expectedSubset.Add(dates[i], values[i]);
+                expectedSubset.Add(dates[i], bars[i]);
             }
 
             //act
-            AssetPriceSeries result = series.GetSubset(range);
+            AssetDataSeries result = series.GetSubset(range);
 
             //assert
             Assert.IsTrue(result.IsSameAs(expectedSubset));
@@ -113,7 +119,7 @@ namespace Tests
         public void CheckSame_NullValue_ReturnFalse()
         {
             //arrange
-            AssetPriceSeries series = new AssetPriceSeries("test");
+            AssetDataSeries series = new AssetDataSeries("test");
 
             //act 
             bool isSame = series.IsSameAs(null);
@@ -126,7 +132,7 @@ namespace Tests
         public void CheckSame_DifferentType_ReturnFalse()
         {
             //arrange
-            AssetPriceSeries series = new AssetPriceSeries("test");
+            AssetDataSeries series = new AssetDataSeries("test");
 
             //act
             bool isSame = series.IsSameAs(new TestIsSameAs());
@@ -140,8 +146,8 @@ namespace Tests
         public void CheckSame_DifferentName_ReturnFalse()
         {
             //arrange 
-            AssetPriceSeries series = new AssetPriceSeries("test_1");
-            AssetPriceSeries series2 = new AssetPriceSeries("test_2");
+            AssetDataSeries series = new AssetDataSeries("test_1");
+            AssetDataSeries series2 = new AssetDataSeries("test_2");
 
             //act
             bool isSame = series.IsSameAs(series2);
@@ -154,13 +160,13 @@ namespace Tests
         public void CheckSame_DifferentSeries_ReturnFalse()
         {
             //arrange
-            AssetPriceSeries series1 = new AssetPriceSeries("test_1");
-            series1.Add(new DateTime(2018, 1, 1), 10);
-            series1.Add(new DateTime(2018, 1, 2), 11);
+            AssetDataSeries series1 = new AssetDataSeries("test_1");
+            series1.Add(new DateTime(2018, 1, 1), new Bar(10));
+            series1.Add(new DateTime(2018, 1, 2), new Bar(11));
 
-            AssetPriceSeries series2 = new AssetPriceSeries("test_2");
-            series2.Add(new DateTime(2018, 1, 1), 10);
-            series2.Add(new DateTime(2018, 1, 20), 11);
+            AssetDataSeries series2 = new AssetDataSeries("test_2");
+            series2.Add(new DateTime(2018, 1, 1), new Bar(10));
+            series2.Add(new DateTime(2018, 1, 20), new Bar(11));
 
             //act
             bool isSame = series1.IsSameAs(series2);
@@ -174,17 +180,41 @@ namespace Tests
         public void CheckSame_SameObject_ReturnTrue()
         {
             //arrange
-            AssetPriceSeries series1 = new AssetPriceSeries("test");
-            series1.Add(new DateTime(2018, 1, 1), 10);
+            AssetDataSeries series1 = new AssetDataSeries("test")
+            {
+                { new DateTime(2018, 1, 1), new Bar(10) }
+            };
 
-            AssetPriceSeries series2 = new AssetPriceSeries("test");
-            series2.Add(new DateTime(2018, 1, 1), 10);
+            AssetDataSeries series2 = new AssetDataSeries("test")
+            {
+                { new DateTime(2018, 1, 1), new Bar(10) }
+            };
 
             //act
             bool isSame = series1.IsSameAs(series2);
 
             //assert
             Assert.IsTrue(isSame);
+        }
+
+        [TestMethod()]
+        public void GetEntriesInOrder_GetEntries_ReturnsOrderedByDate()
+        {
+            //arrange
+            AssetDataSeries series1 = new AssetDataSeries("test")
+            {
+                {new DateTime(2018, 1, 1), new Bar(10) },
+                {new DateTime(2017, 2, 1), new Bar(11) },
+                {new DateTime(2017, 5, 1), new Bar(12) }
+            };
+
+            List<double> expectedOrderedPrices = new List<double> { 11, 12, 10 };
+
+            //act
+            List<double> orderedEntries = series1.GetPricesInOrder();
+
+            //assert
+            CollectionAssert.AreEqual(orderedEntries, expectedOrderedPrices);
         }
     }
 }

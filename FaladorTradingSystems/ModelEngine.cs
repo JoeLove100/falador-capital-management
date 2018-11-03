@@ -20,15 +20,15 @@ namespace Engine
 
         #region properties
 
-        public AssetPriceSeriesCollection AssetPriceData { get; }
+        public MarketData AssetPriceData { get; }
 
         #endregion
 
         #region methods
 
-        public AssetPriceSeries GetPriceSeries()
+        public AssetDataSeries GetPriceSeries()
         {
-            return AssetPriceData.First<AssetPriceSeries>();
+            return AssetPriceData.First<AssetDataSeries>();
         }
 
 
