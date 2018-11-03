@@ -20,7 +20,7 @@ namespace FaladorTradingSystems.DataHandling
         {
             _marketData = marketData;
             _dateEnumerator = _marketData.GetNextDate();
-
+            AllAssets = _marketData.GetAllNames();
         }
         #endregion
 
@@ -31,6 +31,7 @@ namespace FaladorTradingSystems.DataHandling
         private IEnumerator<DateTime> _dateEnumerator { get; }
 
         public EventQueue Events { get; set; }
+        public override DateTime CurrentDate => _dateEnumerator.Current;
         #endregion 
 
         #region methods

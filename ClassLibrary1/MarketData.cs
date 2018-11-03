@@ -66,6 +66,12 @@ namespace Utils
 
         }
 
+        public List<string> GetAllNames()
+        {
+            return Data.GetAllSymbols();
+        }
+
+
         #endregion 
     }
 
@@ -74,6 +80,18 @@ namespace Utils
         protected override string GetKeyForItem(AssetDataSeries item)
         {
             return item.Name;
+        }
+
+        public List<string> GetAllSymbols()
+        {
+            List<string> output = new List<string>();
+            
+            foreach(AssetDataSeries series in this)
+            {
+                output.Add(series.Name);
+            }
+
+            return output;
         }
     }
 }

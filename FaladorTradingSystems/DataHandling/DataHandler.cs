@@ -15,6 +15,15 @@ namespace FaladorTradingSystems.DataHandling
     
     public abstract class DataHandler
     {
+        #region properties
+
+        public virtual DateTime CurrentDate { get; set; }
+        public List<string> AllAssets { get; set; }
+
+        #endregion 
+
+        #region methods
+
         public virtual Bar[] GetLatestBars(string ticker, int n = 1)
         {
             ///<summary>
@@ -33,5 +42,7 @@ namespace FaladorTradingSystems.DataHandling
             throw new NotImplementedException("data handler must provide" +
                 "functionality for UpdateBars");
         }
+
+        #endregion 
     }
 }

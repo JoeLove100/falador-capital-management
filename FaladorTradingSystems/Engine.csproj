@@ -44,7 +44,7 @@
     <Compile Include="AssetPriceDataLoader.cs" />
     <Compile Include="DataHandling\EventQueue.cs" />
     <Compile Include="DataHandling\HistoricSeriesDataHandler.cs" />
-    <Compile Include="DataHandling\IDataHandler.cs" />
+    <Compile Include="DataHandling\DataHandler.cs" />
     <Compile Include="Events\EventType.cs" />
     <Compile Include="Events\FillEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
@@ -55,6 +55,8 @@
     <Compile Include="ModelEngine.cs" />
     <Compile Include="ProjectParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\IStrategy.cs" />
+    <Compile Include="Strategies\StrategyBuyAndHold.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\Utils.csproj">
