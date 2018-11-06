@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace FaladorTradingSystems.Events
 {
-    public enum SignalDirection
+    public enum OrderType
     {
-        Long,
-        Short,
-        Exit
+        Buy,
+        Sell
     }
 }

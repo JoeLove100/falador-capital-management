@@ -49,10 +49,15 @@
     <Compile Include="Events\FillEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\MarketEvent.cs" />
+    <Compile Include="Events\OrderType.cs" />
     <Compile Include="Events\SignalDirection.cs" />
     <Compile Include="Events\SignalEvent.cs" />
     <Compile Include="Events\TradeEvent.cs" />
     <Compile Include="ModelEngine.cs" />
+    <Compile Include="Portfolio\AssetAllocation.cs" />
+    <Compile Include="Portfolio\IPortfolio.cs" />
+    <Compile Include="Portfolio\NaivePortfolio.cs" />
+    <Compile Include="Portfolio\PortfolioValuation.cs" />
     <Compile Include="ProjectParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategies\IStrategy.cs" />

@@ -43,6 +43,17 @@ namespace FaladorTradingSystems.DataHandling
                 "functionality for UpdateBars");
         }
 
+        public virtual Dictionary<string, double> GetLastPrices()
+        {
+            ///<summary>
+            ///helper method to return latest
+            ///prices by asset
+            ///</summary>
+
+            throw new NotImplementedException("data handler must provide" +
+            "functionality for UpdGetLastPrices");
+        }
+
         #endregion 
     }
 }

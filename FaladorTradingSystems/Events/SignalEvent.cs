@@ -13,18 +13,23 @@ namespace FaladorTradingSystems.Events
     
     public class SignalEvent : IEvent
     {
-        public SignalEvent(DateTime dateTimeGenerated, string ticker, SignalDirection direction)
+        public SignalEvent(DateTime dateTimeGenerated, 
+            string ticker, 
+            SignalDirection direction,
+            double strength)
         {
             Type = EventType.SignalEvent;
             DateTimeGenerated = dateTimeGenerated;
             Ticker = ticker;
             Direction = direction;
+            Strenth = strength;
         }
 
         public EventType Type { get; }
-        DateTime DateTimeGenerated { get; }
-        string Ticker { get; }
-        SignalDirection Direction { get; }
+        public DateTime DateTimeGenerated { get; }
+        public string Ticker { get; }
+        public SignalDirection Direction { get; }
+        public double Strenth { get; }
 
     }
 }

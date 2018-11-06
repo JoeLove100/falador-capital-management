@@ -58,6 +58,19 @@ namespace FaladorTradingSystems.DataHandling
             _continueBacktest = _dateEnumerator.MoveNext();
         }
 
+        public override Dictionary<string, double> GetLastPrices()
+        {
+            Dictionary<string, double> output = new Dictionary<string, double>();
+
+            foreach(string asset in AllAssets)
+            {
+                Bar lastBar = GetLatestBars(asset, 1)[0];
+                output.Add(asset, lastBar.Price);
+            }
+
+            return output;
+        }
+
         #endregion 
 
     }

@@ -19,7 +19,7 @@ namespace FaladorTradingSystems.Events
         {
             Type = EventType.FillEvent;
             DateTimeFilled = dateTimeFilled;
-            Direction = direction;
+            OrderType = direction;
             Ticker = ticker;
             Quantity = quantity;
             Exchange = exchange;
@@ -29,9 +29,9 @@ namespace FaladorTradingSystems.Events
         #region properties
         public EventType Type { get;}
         public DateTime DateTimeFilled { get; }
-        public SignalDirection Direction { get; }
+        public OrderType OrderType { get; }
         public string Ticker { get; }
-        double Quantity { get; }
+        public double Quantity { get; }
         public string Exchange { get; }
         #endregion 
 

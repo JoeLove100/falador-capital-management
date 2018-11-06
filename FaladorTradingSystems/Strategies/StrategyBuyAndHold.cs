@@ -57,7 +57,5 @@ namespace FaladorTradingSystems.Strategies
         }
 
         #endregion 
-
-
     }
 }
