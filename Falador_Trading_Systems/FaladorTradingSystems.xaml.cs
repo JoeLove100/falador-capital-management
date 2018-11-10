@@ -37,6 +37,7 @@ namespace FaladorTradingSystems
         #region properties
 
         protected ModelEngine Engine;
+        protected LineChartPanel ChartPanelAssetPrice;
 
         #endregion
 
@@ -44,6 +45,7 @@ namespace FaladorTradingSystems
 
         protected void InitialiseLineChart()
         {
+            ChartPanelAssetPrice = new LineChartPanel();
             ChartPanelAssetPrice.InitialiseChart(Engine.AssetPriceData);
             ChartPanelAssetPrice.PlotLineChart();
         }

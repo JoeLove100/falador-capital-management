@@ -7,10 +7,15 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Falador Capital Management" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType = "{x:Type local:LineChartPanel}">
+            <local:LineChartPanel DataContext="{Binding}"></local:LineChartPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="662"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -19,20 +24,26 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <local:LineChartPanel x:Name="ChartPanelAssetPrice" Grid.Column="1" Grid.Row="1"
+        <!--<local:LineChartPanel x:Name="ChartPanelAssetPrice" Grid.Column="1" Grid.Row="1"
                                 Grid.ColumnSpan="3" Margin = "3,3,3,3">
             
-        </local:LineChartPanel>
+        </local:LineChartPanel>-->
 
-        <local:MainMenuBar Grid.Column="0" Grid.Row="0"
-                           Grid.ColumnSpan="3" Margin="0,0,0,0">
+        <ContentControl Grid.Column="1" Grid.Row="1"
+                        Name = "ContentControlMain"
+                        Content= "{Binding}">
+            
+        </ContentControl>
+
+        <local:MainMenuBar Grid.Column="1" Grid.Row="0"
+                           Grid.ColumnSpan="2" Margin="0,0,0,0">
 
         </local:MainMenuBar>
 
-        <local:SubMenuPanel Grid.Column="0" Grid.Row="1"
-                            Grid.RowSpan="2" Margin="0,0,0,0">
+        <local:SubMenuPanel Grid.Column="0" Grid.Row="0"
+                            Grid.RowSpan="3" Margin="0,0,0,0">
         </local:SubMenuPanel>
-           
+          
 
     </Grid>
 </Controls:MetroWindow>
