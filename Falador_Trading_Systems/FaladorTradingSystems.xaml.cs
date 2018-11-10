@@ -16,6 +16,7 @@ using Engine;
 using Utils;
 using MahApps.Metro.Controls;
 using FaladorTradingSystems.Views;
+using FaladorTradingSystems.MenuItems;
 
 namespace FaladorTradingSystems
 {
@@ -30,7 +31,8 @@ namespace FaladorTradingSystems
         {
             InitializeComponent();
             Engine = new ModelEngine();
-            InitialiseLineChart();
+            InitialiseViews();
+            AddEventHandlers();
         }
 
         #endregion
@@ -38,17 +40,25 @@ namespace FaladorTradingSystems
         #region properties
 
         protected ModelEngine Engine;
+
         protected LineChartPanel ChartPanelAssetPrice;
+        protected BacktestingPanel ChartPanelBacktesting;
+        protected NewsfeedPanel ChartPanelNewsfeed;
+        protected PortfolioManagementPanel ChartPanelPortfolio;
 
         #endregion
 
         #region methods
 
-        protected void InitialiseLineChart()
+        protected void InitialiseViews()
         {
             ChartPanelAssetPrice = new LineChartPanel();
             ChartPanelAssetPrice.InitialiseChart(Engine.AssetPriceData);
             ChartPanelAssetPrice.PlotLineChart();
+
+            ChartPanelBacktesting = new BacktestingPanel();
+            ChartPanelNewsfeed = new NewsfeedPanel();
+            ChartPanelPortfolio = new PortfolioManagementPanel();
         }
 
 
@@ -58,9 +68,29 @@ namespace FaladorTradingSystems
 
         public void AddEventHandlers()
         {
-            
+            MenuItemMain.AssumptionChanged += ChangeView;
         }
 
-        #endregion 
+        private void ChangeView(object sender, AssumptionChangedEventArgs e)
+        {
+            ViewType viewType = MenuItemMain.GetSelectedView();
+            switch (viewType)
+            {
+                case ViewType.AssetPrice:
+                    DataContext = ChartPanelAssetPrice;
+                    break;
+                case ViewType.Backtest:
+                    DataContext = ChartPanelBacktesting;
+                    break;
+                case ViewType.News:
+                    DataContext = ChartPanelNewsfeed;
+                    break;
+                case ViewType.Portfolio:
+                    DataContext = ChartPanelPortfolio;
+                    break;
+            }
+        }
+
+        #endregion
     }
 }

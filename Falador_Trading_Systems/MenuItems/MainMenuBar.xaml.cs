@@ -43,6 +43,16 @@ namespace FaladorTradingSystems.MenuItems
             SetButtonColours();
         }
 
+        public ViewType GetSelectedView()
+        {
+            if (SelectedButton == ButtonAssetPrice.Name) return ViewType.AssetPrice;
+            if (SelectedButton == ButtonBacktest.Name) return ViewType.Backtest;
+            if (SelectedButton == ButtonNews.Name) return ViewType.News;
+            if (SelectedButton == ButtonPortfolio.Name) return ViewType.Portfolio;
+
+            throw new ArgumentException($"Unknown view selected: {SelectedButton}");
+        }
+
         private void SetButtonColours()
         {
             foreach(Control button in StackPanelMain.Children)
@@ -83,5 +93,13 @@ namespace FaladorTradingSystems.MenuItems
 
         #endregion
 
+    }
+
+    public enum ViewType
+    {
+        AssetPrice,
+        Backtest,
+        News,
+        Portfolio
     }
 }

@@ -12,6 +12,15 @@
         <DataTemplate DataType = "{x:Type views:LineChartPanel}">
             <views:LineChartPanel DataContext="{Binding}"></views:LineChartPanel>
         </DataTemplate>
+        <DataTemplate DataType = "{x:Type views:BacktestingPanel}">
+            <views:BacktestingPanel DataContext="{Binding}"></views:BacktestingPanel>
+        </DataTemplate>
+        <DataTemplate DataType = "{x:Type views:NewsfeedPanel}">
+            <views:NewsfeedPanel DataContext="{Binding}"></views:NewsfeedPanel>
+        </DataTemplate>
+        <DataTemplate DataType = "{x:Type views:PortfolioManagementPanel}">
+            <views:PortfolioManagementPanel DataContext="{Binding}"></views:PortfolioManagementPanel>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,19 +29,20 @@
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height ="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
         <ContentControl Grid.Column="1" Grid.Row="1"
                         Name = "ContentControlMain"
-                        Content= "{Binding}">
-            
+                        Content= "{Binding}"
+                        Margin="3,3,3,3">
         </ContentControl>
 
         <menus:MainMenuBar Grid.Column="1" Grid.Row="0"
-                           Grid.ColumnSpan="2" Margin="0,0,0,0">
+                           Grid.ColumnSpan="2" Margin="0,0,0,0"
+                           x:Name ="MenuItemMain">
 
         </menus:MainMenuBar>
 

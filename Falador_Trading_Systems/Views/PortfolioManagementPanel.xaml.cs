@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Falador_Trading_Systems.Views
+namespace FaladorTradingSystems.Views
 {
     /// <summary>
     /// Interaction logic for PortfolioManagementPanel.xaml
