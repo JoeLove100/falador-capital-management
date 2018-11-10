@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AssetDataSeries_Test.cs" />
     <Compile Include="Bar_Test.cs" />
+    <Compile Include="ExtenstionMethods_Test.cs" />
     <Compile Include="IsSameAs_Test.cs" />
     <Compile Include="MarketData_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,10 @@
     <ProjectReference Include="..\ClassLibrary1\Utils.csproj">
       <Project>{c3c1e34b-92fc-40af-b3f6-c4347b44aef9}</Project>
       <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaladorTradingSystems\Engine.csproj">
+      <Project>{c71292c4-5f0e-40a1-a2c6-162ea9465650}</Project>
+      <Name>Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

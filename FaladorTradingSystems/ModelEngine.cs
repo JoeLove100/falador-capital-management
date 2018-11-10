@@ -28,7 +28,7 @@ namespace Engine
 
         public AssetDataSeries GetPriceSeries()
         {
-            return AssetPriceData.First<AssetDataSeries>();
+            return AssetPriceData.Data.First();
         }
 
 

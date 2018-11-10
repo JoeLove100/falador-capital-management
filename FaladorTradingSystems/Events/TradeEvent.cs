@@ -9,13 +9,13 @@ namespace FaladorTradingSystems.Events
     public class TradeEvent : IEvent
     {
         #region constructor
-        public TradeEvent(DateTime dateTimeGenerated, string ticker, OrderType direction,
+        public TradeEvent(DateTime dateTimeGenerated, string ticker, OrderType orderType,
             double quantity)
         {
             Type = EventType.TradeEvent;
             DateTimeGenerated = dateTimeGenerated;
             Ticker = ticker;
-            Direction = direction;
+            OrderType = orderType;
             Quantity = quantity;
         }
         #endregion
@@ -24,7 +24,7 @@ namespace FaladorTradingSystems.Events
         public EventType Type { get; }
         public DateTime DateTimeGenerated { get; }
         public string Ticker { get; }
-        public OrderType Direction { get; }
+        public OrderType OrderType { get; }
         public double Quantity { get; }
         #endregion 
     }

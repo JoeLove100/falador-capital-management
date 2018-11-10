@@ -24,12 +24,12 @@ namespace Engine
         {
             string[] seriesNames = (string[]) GetFormattedSeriesNames(rawDataFromCsv[0].Split(','));
             List<DateTime> dates = new List<DateTime>();
-            var output = new MarketData();
+            var seriesCollection = new AssetDataSeriesCollection();
             
             for(int i =1; i < seriesNames.Length; i++)
             {
                 AssetDataSeries series = new AssetDataSeries(seriesNames[i]);
-                output.Add(series);
+                seriesCollection.Add(series);
             }    
 
             for(int i = 1; i < rawDataFromCsv.Count; i++)
@@ -44,7 +44,8 @@ namespace Engine
                     try
                     {
                         if (priceEntry[j] == "") continue;
-                        output[seriesNames[j]].Add(date, double.Parse(priceEntry[j]));
+                        Bar bar = new Bar(double.Parse(priceEntry[j]));
+                        seriesCollection[seriesNames[j]].Add(date, bar);
                     }
                     catch (Exception ex)
                     {
@@ -53,6 +54,8 @@ namespace Engine
                 }
 
             }
+
+            MarketData output = new MarketData(seriesCollection);
 
             return output;
         }

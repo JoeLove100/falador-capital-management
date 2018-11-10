@@ -14,8 +14,8 @@ namespace FaladorTradingSystems.Events
     public class FillEvent : IEvent
     {
         #region constructor
-        public FillEvent(DateTime dateTimeFilled, SignalDirection direction, string ticker,
-            double quantity, string exchange)
+        public FillEvent(DateTime dateTimeFilled, OrderType direction, string ticker,
+            double quantity, Exchange exchange, double transactionCost)
         {
             Type = EventType.FillEvent;
             DateTimeFilled = dateTimeFilled;
@@ -23,6 +23,7 @@ namespace FaladorTradingSystems.Events
             Ticker = ticker;
             Quantity = quantity;
             Exchange = exchange;
+            TransactionCost = transactionCost;
         }
         #endregion
 
@@ -32,7 +33,8 @@ namespace FaladorTradingSystems.Events
         public OrderType OrderType { get; }
         public string Ticker { get; }
         public double Quantity { get; }
-        public string Exchange { get; }
+        public Exchange Exchange { get; }
+        public double TransactionCost { get; }
         #endregion 
 
     }

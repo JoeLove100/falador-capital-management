@@ -46,6 +46,7 @@
     <Compile Include="DataHandling\HistoricSeriesDataHandler.cs" />
     <Compile Include="DataHandling\DataHandler.cs" />
     <Compile Include="Events\EventType.cs" />
+    <Compile Include="Events\Exchange.cs" />
     <Compile Include="Events\FillEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\MarketEvent.cs" />
@@ -53,7 +54,10 @@
     <Compile Include="Events\SignalDirection.cs" />
     <Compile Include="Events\SignalEvent.cs" />
     <Compile Include="Events\TradeEvent.cs" />
+    <Compile Include="Execution\IExecutionHandler.cs" />
+    <Compile Include="Execution\NaiveExecutionHandler.cs" />
     <Compile Include="ModelEngine.cs" />
+    <Compile Include="Performance\PerformanceAnalyticsHelper.cs" />
     <Compile Include="Portfolio\AssetAllocation.cs" />
     <Compile Include="Portfolio\IPortfolio.cs" />
     <Compile Include="Portfolio\NaivePortfolio.cs" />

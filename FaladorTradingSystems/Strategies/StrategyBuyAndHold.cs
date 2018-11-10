@@ -47,7 +47,7 @@ namespace FaladorTradingSystems.Strategies
                 if (bars == null || bars.Length == 0) continue;
 
                 SignalEvent signal = new SignalEvent(DateTime.Now, asset,
-                    SignalDirection.Long);
+                    SignalDirection.Long, 0); //need to update the strength
 
                 _boughtAssets[asset] = true;
 
