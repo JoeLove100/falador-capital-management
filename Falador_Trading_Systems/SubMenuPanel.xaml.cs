@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Falador_Trading_Systems
+namespace FaladorTradingSystems
 {
     /// <summary>
     /// Interaction logic for SubMenuPanel.xaml

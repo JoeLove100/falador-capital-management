@@ -67,3 +67,13 @@ C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\UI
 C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\UI.csproj.CopyComplete
 C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\Falador_Trading_Systems.exe
 C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\Falador_Trading_Systems.pdb
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\bin\Debug\ControlzEx.dll
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\bin\Debug\MahApps.Metro.dll
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\bin\Debug\ControlzEx.pdb
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\bin\Debug\MahApps.Metro.pdb
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\bin\Debug\MahApps.Metro.xml
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\MainMenuBar.g.cs
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\SubMenuPanel.g.cs
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\MainMenuBar.baml
+C:\Users\joelo\code\Falador_Trading_Systems\Falador_Trading_Systems\obj\Debug\SubMenuPanel.baml
