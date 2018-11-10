@@ -1,9 +1,10 @@
-﻿<local:ObservableControl x:Class="FaladorTradingSystems.LineChartPanel"
+﻿<local:ObservableControl x:Class="FaladorTradingSystems.Views.LineChartPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FaladorTradingSystems"
+             xmlns:custom="clr-namespace:FaladorTradingSystems.UserControls"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -44,10 +45,10 @@
             Ticker to show
         </ComboBox>
 
-        <local:DateRangeBar Grid.Row="2" Grid.Column="0"
+        <custom:DateRangeBar Grid.Row="2" Grid.Column="0"
                             Grid.ColumnSpan="3"
                             x:Name="DateRangeControl">
-        </local:DateRangeBar>
+        </custom:DateRangeBar>
         
         
     </Grid>

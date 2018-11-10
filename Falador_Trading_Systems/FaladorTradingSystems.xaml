@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FaladorTradingSystems"
+        xmlns:views="clr-namespace:FaladorTradingSystems.Views"
+        xmlns:menus="clr-namespace:FaladorTradingSystems.MenuItems"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Falador Capital Management" Height="450" Width="800">
     <Window.Resources>
-        <DataTemplate DataType = "{x:Type local:LineChartPanel}">
-            <local:LineChartPanel DataContext="{Binding}"></local:LineChartPanel>
+        <DataTemplate DataType = "{x:Type views:LineChartPanel}">
+            <views:LineChartPanel DataContext="{Binding}"></views:LineChartPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -24,25 +25,20 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <!--<local:LineChartPanel x:Name="ChartPanelAssetPrice" Grid.Column="1" Grid.Row="1"
-                                Grid.ColumnSpan="3" Margin = "3,3,3,3">
-            
-        </local:LineChartPanel>-->
-
         <ContentControl Grid.Column="1" Grid.Row="1"
                         Name = "ContentControlMain"
                         Content= "{Binding}">
             
         </ContentControl>
 
-        <local:MainMenuBar Grid.Column="1" Grid.Row="0"
+        <menus:MainMenuBar Grid.Column="1" Grid.Row="0"
                            Grid.ColumnSpan="2" Margin="0,0,0,0">
 
-        </local:MainMenuBar>
+        </menus:MainMenuBar>
 
-        <local:SubMenuPanel Grid.Column="0" Grid.Row="0"
+        <menus:SubMenuPanel Grid.Column="0" Grid.Row="0"
                             Grid.RowSpan="3" Margin="0,0,0,0">
-        </local:SubMenuPanel>
+        </menus:SubMenuPanel>
           
 
     </Grid>

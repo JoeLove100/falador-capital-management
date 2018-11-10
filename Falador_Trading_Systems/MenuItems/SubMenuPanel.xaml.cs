@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FaladorTradingSystems
+namespace FaladorTradingSystems.MenuItems
 {
     /// <summary>
     /// Interaction logic for SubMenuPanel.xaml
     /// </summary>
-    public partial class SubMenuPanel : UserControl
+    public partial class SubMenuPanel : ObservableControl
     {
         public SubMenuPanel()
         {

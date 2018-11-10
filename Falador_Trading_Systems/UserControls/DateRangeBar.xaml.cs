@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Utils;
 
-namespace FaladorTradingSystems
+namespace FaladorTradingSystems.UserControls
 {
     /// <summary>
     /// Interaction logic for DateRangeBar.xaml

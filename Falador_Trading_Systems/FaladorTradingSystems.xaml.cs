@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Engine;
 using Utils;
 using MahApps.Metro.Controls;
+using FaladorTradingSystems.Views;
 
 namespace FaladorTradingSystems
 {

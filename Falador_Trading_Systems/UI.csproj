@@ -95,18 +95,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SubMenuPanel.xaml.cs">
+    <Compile Include="MenuItems\SubMenuPanel.xaml.cs">
       <DependentUpon>SubMenuPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewsfeedPanel.xaml.cs">
+      <DependentUpon>NewsfeedPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PortfolioManagementPanel.xaml.cs">
+      <DependentUpon>PortfolioManagementPanel.xaml</DependentUpon>
     </Compile>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DateRangeBar.xaml">
+    <Page Include="UserControls\DateRangeBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LineChartPanel.xaml">
+    <Page Include="Views\BacktestingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LineChartPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,27 +128,38 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DateRangeBar.xaml.cs">
+    <Compile Include="UserControls\DateRangeBar.xaml.cs">
       <DependentUpon>DateRangeBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LineChartPanel.xaml.cs">
+    <Compile Include="Views\BacktestingPanel.xaml.cs">
+      <DependentUpon>BacktestingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LineChartPanel.xaml.cs">
       <DependentUpon>LineChartPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="FaladorTradingSystems.xaml.cs">
       <DependentUpon>FaladorTradingSystems.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MainMenuBar.xaml">
+    <Page Include="MenuItems\MainMenuBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SubMenuPanel.xaml">
+    <Page Include="MenuItems\SubMenuPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewsfeedPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PortfolioManagementPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenuBar.xaml.cs">
+    <Compile Include="MenuItems\MainMenuBar.xaml.cs">
       <DependentUpon>MainMenuBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObservableControl.cs" />
@@ -178,5 +199,6 @@
       <Name>Engine</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

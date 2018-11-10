@@ -18,8 +18,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using Utils;
+using FaladorTradingSystems.UserControls;
 
-namespace FaladorTradingSystems
+namespace FaladorTradingSystems.Views
 {
     /// <summary>
     /// Interaction logic for LineChartPanel.xaml

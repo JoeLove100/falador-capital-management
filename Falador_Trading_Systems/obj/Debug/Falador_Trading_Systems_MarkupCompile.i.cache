@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-6-1628073395
+9-636158869
 
-1454626928
+17954654195
 312142479936
-App.xaml;DateRangeBar.xaml;LineChartPanel.xaml;FaladorTradingSystems.xaml;MainMenuBar.xaml;SubMenuPanel.xaml;
+App.xaml;UserControls\DateRangeBar.xaml;Views\BacktestingPanel.xaml;Views\LineChartPanel.xaml;FaladorTradingSystems.xaml;MenuItems\MainMenuBar.xaml;MenuItems\SubMenuPanel.xaml;Views\NewsfeedPanel.xaml;Views\PortfolioManagementPanel.xaml;
 
 True
 
