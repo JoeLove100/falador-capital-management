@@ -23,8 +23,8 @@ namespace Tests
             double[] expectedArray = new double[] { 1.4, 2.4, 5.3, 1.1 };
 
             //act
-            List<double> subtractedList = testList.Subtract(0);
-            double[] subtractedArray = testArray.Subtract(0);
+            List<double> subtractedList = (List<double>) testList.Subtract(0);
+            double[] subtractedArray = (double[]) testArray.Subtract(0);
 
             //asssert
             CollectionAssert.AreEqual(subtractedList, expectedList);
@@ -42,8 +42,8 @@ namespace Tests
             double[] expectedArray = new double[] { -0.6, 0.4, 3.3, -0.9 };
 
             //act
-            List<double> subtractedList = testList.Subtract(2);
-            double[] subtractedArray = testArray.Subtract(2);
+            List<double> subtractedList = (List<double>) testList.Subtract(2);
+            double[] subtractedArray = (double[]) testArray.Subtract(2);
 
             //asssert
             Assert.IsTrue(subtractedList.IsAlmostEqual(expectedList));
@@ -61,8 +61,8 @@ namespace Tests
             double[] expectedArray = new double[] { 2.9, 3.9, 6.8, 2.6 };
 
             //act
-            List<double> subtractedList = testList.Subtract(-1.5);
-            double[] subtractedArray = testArray.Subtract(-1.5);
+            List<double> subtractedList = (List<double>) testList.Subtract(-1.5);
+            double[] subtractedArray = (double[]) testArray.Subtract(-1.5);
 
             //asssert
             Assert.IsTrue(subtractedList.IsAlmostEqual(expectedList));
@@ -80,8 +80,8 @@ namespace Tests
             double[] expectedArray = new double[] { 1.4, 2.1, 2.1, 1.1 };
 
             //act
-            List<double> cappedList = testList.Cap(3);
-            double[] cappedArray = testArray.Cap(2.1);
+            List<double> cappedList = (List<double>) testList.Cap(3);
+            double[] cappedArray = (double[]) testArray.Cap(2.1);
 
             //asssert
             Assert.IsTrue(cappedList.IsAlmostEqual(expectedList));
@@ -99,8 +99,8 @@ namespace Tests
             double[] expectedArray = new double[] {-1.4, -2.4, -5.3, -1.1 };
 
             //act
-            List<double> cappedList = testList.Cap(-2);
-            double[] cappedArray = testArray.Cap(-1);
+            List<double> cappedList = (List<double>) testList.Cap(-2);
+            double[] cappedArray = (double[]) testArray.Cap(-1);
 
             //asssert
             Assert.IsTrue(cappedList.IsAlmostEqual(expectedList));

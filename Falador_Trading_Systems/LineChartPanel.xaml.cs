@@ -54,19 +54,19 @@ namespace FaladorTradingSystems
             }
         }
 
-        private  MarketData _seriesCollection { get; set; }
+        private  MarketData _marketData { get; set; }
         private string _selectedSeries => (string) ComboBoxTicker.SelectedItem;
 
         #endregion 
 
         #region public methods
 
-        public void InitialiseChart(MarketData collection)
+        public void InitialiseChart(MarketData marketData)
         {
-            _seriesCollection = collection;
+            _marketData = marketData;
             Series = new SeriesCollection();
 
-            foreach(AssetDataSeries series in _seriesCollection)
+            foreach(AssetDataSeries series in _marketData.Data)
             {
                 ComboBoxTicker.Items.Add(series.Name);
             }
@@ -80,7 +80,7 @@ namespace FaladorTradingSystems
 
         public void PlotLineChart()
         {
-            AssetDataSeries selectedSeries = _seriesCollection[_selectedSeries];
+            AssetDataSeries selectedSeries = _marketData.Data[_selectedSeries];
             DateRange selectedRange = DateRangeControl.GetSettings();
             AssetDataSeries priceSeries = selectedSeries.GetSubset(selectedRange);
 
@@ -99,7 +99,7 @@ namespace FaladorTradingSystems
 
         private void InitialiseDateRangeControl()
         {
-            AssetDataSeries series = _seriesCollection[_selectedSeries];
+            AssetDataSeries series = _marketData.Data[_selectedSeries];
             DateRange range = new DateRange(series.FirstDate, series.LastDate);
             DateRangeControl.InitialiseControls(range);
         }
