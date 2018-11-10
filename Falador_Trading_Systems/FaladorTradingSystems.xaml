@@ -13,14 +13,20 @@
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height ="*"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <local:LineChartPanel x:Name="ChartPanelAssetPrice" Grid.Column="1" Grid.Row="1">
+        <local:LineChartPanel x:Name="ChartPanelAssetPrice" Grid.Column="1" Grid.Row="1"
+                                Grid.ColumnSpan="3" Margin = "3,3,3,3">
             
         </local:LineChartPanel>
+
+        <Grid Grid.Column = "0" Grid.Row="0"
+              Grid.ColumnSpan="3" Name="GridMainMenu">
+            
+        </Grid>
 
     </Grid>
 </Window>
