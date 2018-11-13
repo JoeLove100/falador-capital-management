@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace FaladorTradingSystems.DataHandling
+namespace FaladorTradingSystems.Backtesting.DataHandling
 {
     /// <summary>
     /// abstract class dictating basic functionality

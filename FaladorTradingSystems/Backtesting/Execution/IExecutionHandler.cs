@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FaladorTradingSystems.Events;
+using FaladorTradingSystems.Backtesting.Events;
 
-namespace FaladorTradingSystems.Execution
+namespace FaladorTradingSystems.Backtesting.Execution
 {
     /// <summary>
     /// base class for execution handler - ie

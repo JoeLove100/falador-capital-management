@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace FaladorTradingSystems.DataHandling
+namespace FaladorTradingSystems.Backtesting.DataHandling
 {
     /// <summary>
     /// data handler to use market data from

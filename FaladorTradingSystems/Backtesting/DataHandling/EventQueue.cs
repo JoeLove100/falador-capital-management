@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FaladorTradingSystems.Events;
 
-namespace FaladorTradingSystems.DataHandling
+namespace FaladorTradingSystems.Backtesting.DataHandling
 {
     public class EventQueue : SortedDictionary<DateTime, IEvent>
     {

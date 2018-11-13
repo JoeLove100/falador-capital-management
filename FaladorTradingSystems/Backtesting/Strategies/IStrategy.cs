@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FaladorTradingSystems.Events;
+using FaladorTradingSystems.Backtesting.Events;
 
-namespace FaladorTradingSystems.Strategies
+namespace FaladorTradingSystems.Backtesting.Strategies
 {
     /// <summary>
     /// Base class for defining strategies - has

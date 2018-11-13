@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FaladorTradingSystems.Events
+namespace FaladorTradingSystems.Backtesting.Events
 {
     /// <summary>
     /// enum describing the four types of events considered
