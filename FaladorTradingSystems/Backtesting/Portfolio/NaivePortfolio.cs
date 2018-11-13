@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FaladorTradingSystems.DataHandling;
-using FaladorTradingSystems.Events;
+using FaladorTradingSystems.Backtesting.DataHandling;
+using FaladorTradingSystems.Backtesting.Events;
 using Utils;
 
-namespace FaladorTradingSystems.Portfolio 
+namespace FaladorTradingSystems.Backtesting.Portfolio
 {
     /// <summary>
     /// basic portfolio system which naively
@@ -20,7 +20,7 @@ namespace FaladorTradingSystems.Portfolio
 
         public NaivePortfolio(double initialCapital,
             DateTime initialDate,
-            DataHandler handler,
+            IDataHandler handler,
             SortedList<DateTime, IEvent> eventQueue)
         {
             _initialCapital = initialCapital;
@@ -38,7 +38,7 @@ namespace FaladorTradingSystems.Portfolio
 
         protected double _initialCapital { get; }
         protected DateTime _initialDate { get; }
-        protected DataHandler _handler { get; }
+        protected IDataHandler _handler { get; }
         protected SortedList<DateTime, IEvent> _eventQueue { get; set; }
 
         public AssetAllocation CurrentAllocation { get; set; }

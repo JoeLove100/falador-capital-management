@@ -13,7 +13,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
     /// backtesting strategies
     /// </summary>
     
-    public class HistoricSeriesDataHandler : DataHandler
+    public class HistoricSeriesDataHandler : IDataHandler
     {
         #region constructor
         public HistoricSeriesDataHandler(MarketData marketData)
@@ -31,12 +31,13 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
         private IEnumerator<DateTime> _dateEnumerator { get; }
 
         public EventQueue Events { get; set; }
-        public override DateTime CurrentDate => _dateEnumerator.Current;
+        public DateTime CurrentDate { get; set; } 
+        public List<string> AllAssets { get; set; }
         #endregion 
 
         #region methods
         
-        public override Bar[] GetLatestBars(string ticker, int n= 1)
+        public Bar[] GetLatestBars(string ticker, int n= 1)
         {
             AssetDataSeries series;
 
@@ -53,12 +54,13 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
             return output;
         }
 
-        public override void UpdateBars()
+        public void UpdateBars()
         {
             _continueBacktest = _dateEnumerator.MoveNext();
+            CurrentDate = _dateEnumerator.Current;
         }
 
-        public override Dictionary<string, double> GetLastPrices()
+        public Dictionary<string, double> GetLastPrices()
         {
             Dictionary<string, double> output = new Dictionary<string, double>();
 

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utils;
-using FaladorTradingSystems.Events;
-using FaladorTradingSystems.DataHandling;
+using FaladorTradingSystems.Backtesting.Events;
+using FaladorTradingSystems.Backtesting.DataHandling;
 
-namespace FaladorTradingSystems.Strategies
+namespace FaladorTradingSystems.Backtesting.Strategies
 {
     /// <summary>
     /// Basic strategy which goes LONG an asset as soon
@@ -18,7 +18,7 @@ namespace FaladorTradingSystems.Strategies
     public class StrategyBuyAndHold : IStrategy
     {
         #region constructors
-        public StrategyBuyAndHold(DataHandler dataHandler)
+        public StrategyBuyAndHold(IDataHandler dataHandler)
         {
             _boughtAssets = dataHandler.AllAssets.ToDictionary(v => v, v => false);
         }
@@ -28,7 +28,7 @@ namespace FaladorTradingSystems.Strategies
         #region properties
 
         protected Dictionary<string, bool> _boughtAssets { get; set; }
-        protected DataHandler _handler { get; }
+        protected IDataHandler _handler { get; }
         public SortedList<DateTime, SignalEvent> Signals { get; set; }
 
         #endregion
