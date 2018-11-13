@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FaladorTradingSystems.Portfolio
+namespace FaladorTradingSystems.Backtesting.Portfolio
 {
     public class PortfolioValuation : Dictionary<string, double>
     {

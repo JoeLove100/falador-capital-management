@@ -25,7 +25,6 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
         #endregion
 
         #region properties
-        private bool _continueBacktest { get; set; }
         private List<string> _symbolList { get; set; }
         private MarketData _marketData { get; set; }
         private IEnumerator<DateTime> _dateEnumerator { get; }
@@ -33,6 +32,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
         public EventQueue Events { get; set; }
         public DateTime CurrentDate { get; set; } 
         public List<string> AllAssets { get; set; }
+        public bool ContinueBacktest { get; set; }
         #endregion 
 
         #region methods
@@ -56,7 +56,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
 
         public void UpdateBars()
         {
-            _continueBacktest = _dateEnumerator.MoveNext();
+            ContinueBacktest = _dateEnumerator.MoveNext();
             CurrentDate = _dateEnumerator.Current;
         }
 

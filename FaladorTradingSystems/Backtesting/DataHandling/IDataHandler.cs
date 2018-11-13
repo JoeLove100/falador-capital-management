@@ -19,6 +19,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
 
         DateTime CurrentDate { get; set; }
         List<string> AllAssets { get; set; }
+        bool ContinueBacktest { get; set; }
 
         #endregion 
 

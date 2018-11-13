@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Engine
+namespace FaladorTradingSystems
 {
     /// <summary>
     /// class to store basic (constant) parameters

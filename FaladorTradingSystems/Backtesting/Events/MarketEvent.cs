@@ -15,7 +15,7 @@ namespace FaladorTradingSystems.Backtesting.Events
         #region constructor
         public MarketEvent()
         {
-            Type = EventType.MarktetEvent;
+            Type = EventType.MarketEvent;
         }
         #endregion
 

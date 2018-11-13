@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace Engine
+namespace FaladorTradingSystems
 {
     internal static class AssetPriceDataLoader
     {

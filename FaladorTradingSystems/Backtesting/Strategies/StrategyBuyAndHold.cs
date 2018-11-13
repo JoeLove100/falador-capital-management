@@ -37,7 +37,7 @@ namespace FaladorTradingSystems.Backtesting.Strategies
 
         public void GenerateSignals(IEvent ev)
         {
-            if (ev.Type != EventType.MarktetEvent) return;
+            if (ev.Type != EventType.MarketEvent) return;
 
             foreach(string asset in _boughtAssets.Keys)
             {

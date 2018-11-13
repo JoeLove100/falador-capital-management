@@ -16,7 +16,7 @@ namespace FaladorTradingSystems.Backtesting.Events
     /// </summary>
     public enum EventType
     {
-        MarktetEvent,
+        MarketEvent,
         SignalEvent,
         TradeEvent,
         FillEvent

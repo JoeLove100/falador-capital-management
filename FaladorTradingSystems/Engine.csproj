@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetPriceDataLoader.cs" />
+    <Compile Include="Backtesting\BacktestingEngine.cs" />
     <Compile Include="Backtesting\DataHandling\EventQueue.cs" />
     <Compile Include="Backtesting\DataHandling\HistoricSeriesDataHandler.cs" />
-    <Compile Include="Backtesting\DataHandling\DataHandler.cs" />
+    <Compile Include="Backtesting\DataHandling\IDataHandler.cs" />
+    <Compile Include="Backtesting\Events\EventStack.cs" />
     <Compile Include="Backtesting\Events\EventType.cs" />
     <Compile Include="Backtesting\Events\Exchange.cs" />
     <Compile Include="Backtesting\Events\FillEvent.cs" />

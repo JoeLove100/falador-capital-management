@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FaladorTradingSystems.Events;
+using FaladorTradingSystems.Backtesting.Events;
 
-namespace FaladorTradingSystems.Portfolio
+namespace FaladorTradingSystems.Backtesting.Portfolio
 {
     /// <summary>
     /// basic portfolio contract governing
@@ -16,5 +16,6 @@ namespace FaladorTradingSystems.Portfolio
     {
         void UpdateForSignals(SignalEvent singalEvent);
         void UpdateHoldingsForFill(FillEvent fillEvent);
+        void UpdateForMarketData(MarketEvent marketEvent);
     }
 }

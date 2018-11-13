@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace FaladorTradingSystems.Performance
+namespace FaladorTradingSystems.Backtesting.Performance
 {
     /// <summary>
     /// static class for carrying out basic 
