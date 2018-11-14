@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Engine;
+using FaladorTradingSystems;
 using Utils;
 using MahApps.Metro.Controls;
 using FaladorTradingSystems.Views;
@@ -53,7 +53,7 @@ namespace FaladorTradingSystems
         protected void InitialiseViews()
         {
             ChartPanelAssetPrice = new LineChartPanel();
-            ChartPanelAssetPrice.InitialiseChart(Engine.AssetPriceData);
+            ChartPanelAssetPrice.InitialiseChart(Engine.MarketData);
             ChartPanelAssetPrice.PlotLineChart();
 
             ChartPanelBacktesting = new BacktestingPanel();

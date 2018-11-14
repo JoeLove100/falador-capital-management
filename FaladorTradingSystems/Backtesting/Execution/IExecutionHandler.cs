@@ -14,6 +14,6 @@ namespace FaladorTradingSystems.Backtesting.Execution
     /// </summary>
     public interface IExecutionHandler
     {
-        FillEvent GetFillEventForTrade(TradeEvent tradeEvent);
+        void GetFillEventForTrade(TradeEvent tradeEvent);
     }
 }

@@ -21,12 +21,12 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         public NaivePortfolio(double initialCapital,
             DateTime initialDate,
             IDataHandler handler,
-            SortedList<DateTime, IEvent> eventQueue)
+            EventStack eventStack)
         {
             _initialCapital = initialCapital;
             _initialDate = initialDate;
             _handler = handler;
-            _eventQueue = eventQueue;
+            _eventStack = eventStack;
 
             InitialiseAllocation();
             InitialiseValuations();
@@ -39,7 +39,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         protected double _initialCapital { get; }
         protected DateTime _initialDate { get; }
         protected IDataHandler _handler { get; }
-        protected SortedList<DateTime, IEvent> _eventQueue { get; set; }
+        protected EventStack _eventStack { get; set; }
 
         public AssetAllocation CurrentAllocation { get; set; }
         public SortedList<DateTime, AssetAllocation> AllocationHistory { get; set; }
@@ -98,7 +98,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         public void UpdateForSignals(SignalEvent signalEvent)
         {
             TradeEvent tradeEvent = GenerateTradeFromSignal(signalEvent);
-            _eventQueue.Add(tradeEvent.DateTimeGenerated, tradeEvent);
+            _eventStack.PutEvent(tradeEvent);
         }
 
         #endregion

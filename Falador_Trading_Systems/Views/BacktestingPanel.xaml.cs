@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FaladorTradingSystems.Backtesting;
+using FaladorTradingSystems.Backtesting.Strategies;
+using FaladorTradingSystems.Backtesting.Portfolio;
 
 namespace FaladorTradingSystems.Views
 {
@@ -20,9 +23,49 @@ namespace FaladorTradingSystems.Views
     /// </summary>
     public partial class BacktestingPanel : UserControl
     {
-        public BacktestingPanel()
+        #region constructors
+        public BacktestingPanel(BacktestingEngine engine)
         {
+            BacktestingEngine = engine;
             InitializeComponent();
         }
+        #endregion
+
+        #region properties
+
+        BacktestingEngine BacktestingEngine { get; }
+
+        #endregion
+
+        #region methods
+
+        public void AddEventHandlers()
+        {
+            ButtonBacktest.Click += RunBacktest;
+        }
+
+        private void RunBacktest(object sender, RoutedEventArgs e)
+        {
+            ///<summary>
+            ///temp method while I figure out
+            ///how the backtesting is actually going
+            ///to work
+            ///</summary>
+
+
+            StrategyBuyAndHold strategy = 
+                BacktestingEngine.GetBuyAndHoldStrategy();
+
+            DateTime startDate = new DateTime(2018, 1, 1);
+            NaivePortfolio portfolio =
+                BacktestingEngine.GetNaivePortfolio(1000, startDate);
+
+            BacktestingEngine.RunBacktest(strategy, portfolio);
+
+        }
+
+        #endregion
+
+
     }
 }

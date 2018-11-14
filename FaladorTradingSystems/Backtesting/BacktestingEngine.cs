@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using FaladorTradingSystems.Backtesting.Events;
 using FaladorTradingSystems.Backtesting.DataHandling;
 using FaladorTradingSystems.Backtesting.Portfolio;
 using FaladorTradingSystems.Backtesting.Strategies;
 using FaladorTradingSystems.Backtesting.Execution;
+using Utils;
 
 namespace FaladorTradingSystems.Backtesting
 {
@@ -18,15 +20,20 @@ namespace FaladorTradingSystems.Backtesting
     ///backtesting of strategies
     ///</summary>
     {
+
+        #region constant
+
+        protected readonly int _modelHeartbeat = 10;
+
+        #endregion 
+
+
         #region constructor
 
-        public BacktestingEngine(EventStack eventStack, IDataHandler dataHandler, IPortfolio portfolio,
-            IStrategy strategy, IExecutionHandler executionHandler)
+        public BacktestingEngine(EventStack eventStack, MarketData marketData)
         {
-            DataHandler = dataHandler;
-            Portfolio = portfolio;
-            Strategy = strategy;
-            ExecutionHandler = executionHandler;
+            DataHandler = new HistoricSeriesDataHandler(marketData, eventStack);
+            ExecutionHandler = new NaiveExecutionHandler(eventStack);
         }
 
         #endregion
@@ -34,17 +41,17 @@ namespace FaladorTradingSystems.Backtesting
         #region properties
 
         protected EventStack Events { get; }
-        protected IDataHandler DataHandler { get; }
-        protected IPortfolio Portfolio { get; }
-        protected IStrategy Strategy { get; }
+        public IDataHandler DataHandler { get; }
         protected IExecutionHandler ExecutionHandler { get; }
 
         #endregion
 
-        #region methods
+        #region public methods
            
-        public void RunBacktest()
+        public void RunBacktest(IStrategy strategy,
+                                IPortfolio portfolio)
         {
+
             while (true)
             {
                 if (!DataHandler.ContinueBacktest) break;
@@ -65,11 +72,11 @@ namespace FaladorTradingSystems.Backtesting
                 {
                     case EventType.MarketEvent:
                         MarketEvent marketEv = (MarketEvent)latestEvent;
-                        HandleMarketEvent(marketEv);
+                        HandleMarketEvent(marketEv, strategy, portfolio);
                         continue;
                     case EventType.SignalEvent:
                         SignalEvent signalEv = (SignalEvent)latestEvent;
-                        HandleSignalEvent(signalEv);
+                        HandleSignalEvent(signalEv, portfolio);
                         continue;
                     case EventType.TradeEvent:
                         TradeEvent tradeEv = (TradeEvent)latestEvent;
@@ -77,26 +84,53 @@ namespace FaladorTradingSystems.Backtesting
                         break;
                     case EventType.FillEvent:
                         FillEvent fillEv = (FillEvent)latestEvent;
-                        HandleFillEvent(fillEv);
+                        HandleFillEvent(fillEv, portfolio);
                         break;
                     default:
                         throw new ArgumentException("Unkown even type!");
                 }
 
-
+                Thread.Sleep(_modelHeartbeat);
             }
 
         }
 
-        protected void HandleMarketEvent(MarketEvent marketEv)
+        public StrategyBuyAndHold GetBuyAndHoldStrategy()
         {
-            Strategy.GenerateSignals(marketEv);
-            Portfolio.UpdateForMarketData(marketEv);
+            StrategyBuyAndHold output =
+                new StrategyBuyAndHold(DataHandler);
+
+            return output;
         }
 
-        protected void HandleSignalEvent(SignalEvent singalEv)
+        public NaivePortfolio GetNaivePortfolio(
+            double initialCapital, 
+            DateTime startDate)
         {
-            Portfolio.UpdateForSignals(singalEv);
+            NaivePortfolio output =
+                new NaivePortfolio(initialCapital, startDate,
+                DataHandler, Events);
+
+            return output;
+        }
+
+
+        #endregion
+
+        #region protected methods
+
+        protected void HandleMarketEvent(MarketEvent marketEv, 
+            IStrategy strategy,
+            IPortfolio portfolio)
+        {
+            strategy.GenerateSignals(marketEv);
+            portfolio.UpdateForMarketData(marketEv);
+        }
+
+        protected void HandleSignalEvent(SignalEvent signalEv, 
+            IPortfolio portfolio)
+        {
+            portfolio.UpdateForSignals(signalEv);
         }
 
         protected void HandleTradeEvent(TradeEvent tradeEv)
@@ -104,9 +138,10 @@ namespace FaladorTradingSystems.Backtesting
             ExecutionHandler.GetFillEventForTrade(tradeEv);
         }
 
-        protected void HandleFillEvent(FillEvent fillEv)
+        protected void HandleFillEvent(FillEvent fillEv,
+            IPortfolio portfolio)
         {
-            Portfolio.UpdateHoldingsForFill(fillEv);
+            portfolio.UpdateHoldingsForFill(fillEv);
         }
 
         #endregion 

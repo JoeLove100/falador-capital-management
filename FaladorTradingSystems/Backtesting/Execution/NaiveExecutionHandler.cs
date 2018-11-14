@@ -18,18 +18,18 @@ namespace FaladorTradingSystems.Backtesting.Execution
 
         #region constructor
 
-        public NaiveExecutionHandler(SortedList<DateTime, IEvent> eventQueue)
+        public NaiveExecutionHandler(EventStack eventStack)
         {
-            _eventQueue = eventQueue;
+            _eventStack = eventStack;
         }
 
         #endregion
 
         #region properties
 
-        SortedList<DateTime, IEvent> _eventQueue { get; set; }
+        EventStack _eventStack { get; set; }
 
-        public FillEvent GetFillEventForTrade(TradeEvent tradeEvent)
+        public void GetFillEventForTrade(TradeEvent tradeEvent)
         {
             ///<summary>
             ///Naive fill assumed to be on 
@@ -37,7 +37,7 @@ namespace FaladorTradingSystems.Backtesting.Execution
             ///</summary>
             FillEvent fillEvent = new FillEvent(DateTime.Now, tradeEvent.OrderType,
                 tradeEvent.Ticker, tradeEvent.Quantity, Exchange.GrandExchange, 0);
-            return fillEvent;
+            _eventStack.PutEvent(fillEvent);
         }
 
         #endregion

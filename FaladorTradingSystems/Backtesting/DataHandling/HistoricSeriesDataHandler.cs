@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utils;
+using FaladorTradingSystems.Backtesting.Events;
 
 namespace FaladorTradingSystems.Backtesting.DataHandling
 {
@@ -16,11 +17,12 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
     public class HistoricSeriesDataHandler : IDataHandler
     {
         #region constructor
-        public HistoricSeriesDataHandler(MarketData marketData)
+        public HistoricSeriesDataHandler(MarketData marketData, EventStack eventStack)
         {
             _marketData = marketData;
             _dateEnumerator = _marketData.GetNextDate();
             AllAssets = _marketData.GetAllNames();
+            _eventStack = eventStack;
         }
         #endregion
 
@@ -28,6 +30,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
         private List<string> _symbolList { get; set; }
         private MarketData _marketData { get; set; }
         private IEnumerator<DateTime> _dateEnumerator { get; }
+        private EventStack _eventStack { get; }
 
         public EventQueue Events { get; set; }
         public DateTime CurrentDate { get; set; } 
@@ -58,6 +61,8 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
         {
             ContinueBacktest = _dateEnumerator.MoveNext();
             CurrentDate = _dateEnumerator.Current;
+            MarketEvent newDataArrived= new MarketEvent();
+            _eventStack.PutEvent(newDataArrived);
         }
 
         public Dictionary<string, double> GetLastPrices()
