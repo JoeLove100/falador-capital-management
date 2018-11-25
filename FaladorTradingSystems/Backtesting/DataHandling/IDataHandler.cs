@@ -29,7 +29,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
 
         void UpdateBars();
 
-        Dictionary<string, double> GetLastPrices();
+        Dictionary<string, decimal> GetLastPrices();
         
         #endregion 
     }

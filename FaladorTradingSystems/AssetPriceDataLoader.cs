@@ -44,7 +44,7 @@ namespace FaladorTradingSystems
                     try
                     {
                         if (priceEntry[j] == "") continue;
-                        Bar bar = new Bar(double.Parse(priceEntry[j]));
+                        Bar bar = new Bar(decimal.Parse(priceEntry[j]));
                         seriesCollection[seriesNames[j]].Add(date, bar);
                     }
                     catch (Exception ex)

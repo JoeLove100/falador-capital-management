@@ -18,7 +18,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
     {
         #region constructors
 
-        public NaivePortfolio(double initialCapital,
+        public NaivePortfolio(decimal initialCapital,
             DateTime initialDate,
             IDataHandler handler,
             EventStack eventStack)
@@ -28,15 +28,15 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             _handler = handler;
             _eventStack = eventStack;
 
-            InitialiseAllocation();
-            InitialiseValuations();
+            InitialiseAllocation(initialCapital);
+            InitialiseValuations(initialCapital);
         }
 
         #endregion
 
         #region properties
 
-        protected double _initialCapital { get; }
+        protected decimal _initialCapital { get; }
         protected DateTime _initialDate { get; }
         protected IDataHandler _handler { get; }
         protected EventStack _eventStack { get; set; }
@@ -51,22 +51,26 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
 
         #region public methods
 
-        public void InitialiseAllocation()
+        public void InitialiseAllocation(decimal initialCapital)
         {
-            CurrentAllocation = new AssetAllocation(_handler.AllAssets);
-            AllocationHistory = new SortedList<DateTime, AssetAllocation>
-            {
-                { _initialDate, CurrentAllocation }
-            };
+            CurrentAllocation = new AssetAllocation(_handler.AllAssets, initialCapital);
+            //AllocationHistory = new SortedList<DateTime, AssetAllocation>
+            //{
+            //    { _initialDate, CurrentAllocation }
+            //};
+
+            AllocationHistory = new SortedList<DateTime, AssetAllocation>();
         }
 
-        public void InitialiseValuations()
+        public void InitialiseValuations(decimal initialCapital)
         {
-            CurrentValuation = new PortfolioValuation(_handler.AllAssets, _initialCapital);
-            ValuationHistory = new SortedList<DateTime, PortfolioValuation>
-            {
-                { _initialDate, CurrentValuation }
-            };
+            CurrentValuation = new PortfolioValuation(_handler.AllAssets, initialCapital);
+            //ValuationHistory = new SortedList<DateTime, PortfolioValuation>
+            //{
+            //    { _initialDate, CurrentValuation }
+            //};
+
+            ValuationHistory = new SortedList<DateTime, PortfolioValuation>();
         }
 
         public void UpdateForMarketData(MarketEvent marketEvent)
@@ -81,7 +85,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             AssetAllocation newAssetAllocation = CurrentAllocation.Clone();
             AllocationHistory.Add(_handler.CurrentDate, newAssetAllocation);
 
-            Dictionary<string, double> lastPrices = _handler.GetLastPrices();
+            Dictionary<string, decimal> lastPrices = _handler.GetLastPrices();
 
             PortfolioValuation newValuation = GetValuationFromHoldings(newAssetAllocation,
                 lastPrices, CurrentValuation.FreeCash, CurrentValuation.Commision);
@@ -92,10 +96,10 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         public void UpdateHoldingsForFill(FillEvent fillEvent)
         {
             UpdateAllocationForFill(fillEvent);
-            UpdateHoldingsForFill(fillEvent);
+            UpdateValuationsForFill(fillEvent);
         }
 
-        public void UpdateForSignals(SignalEvent signalEvent)
+        public void GetTradesForSignal(SignalEvent signalEvent)
         {
             TradeEvent tradeEvent = GenerateTradeFromSignal(signalEvent);
             _eventStack.PutEvent(tradeEvent);
@@ -106,15 +110,15 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         #region protected methods
 
         protected PortfolioValuation GetValuationFromHoldings(AssetAllocation allocation,
-            Dictionary<string, double> lastPrices, double freeCash, double commission)
+            Dictionary<string, decimal> lastPrices, decimal freeCash, decimal commission)
         {
             {
                 List<string> assets = new List<string>();
-                List<double> values = new List<double>();
+                List<decimal> values = new List<decimal>();
 
-                foreach (KeyValuePair<string, double> holding in allocation)
+                foreach (KeyValuePair<string, decimal> holding in allocation)
                 {
-                    double positionValue = holding.Value * lastPrices[holding.Key];
+                    decimal positionValue = holding.Value * lastPrices[holding.Key];
                     assets.Add(holding.Key);
                     values.Add(positionValue);
                 }
@@ -132,9 +136,11 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             {
                 case OrderType.Buy:
                     CurrentAllocation[fillEvent.Ticker] += fillEvent.Quantity;
+                    CurrentAllocation["Free cash"] -= fillEvent.Quantity;
                     break;
                 case OrderType.Sell:
                     CurrentAllocation[fillEvent.Ticker] -= fillEvent.Quantity;
+                    CurrentAllocation["Free cash"] += fillEvent.Quantity;
                     break;
                 default:
                     throw new ArgumentException($"Uknown order type placed " +
@@ -145,8 +151,8 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
 
         protected void UpdateValuationsForFill(FillEvent fillEvent)
         {
-            double assetPrice = _handler.GetLatestBars(fillEvent.Ticker)[0].Price;
-            double fillCost = fillEvent.Quantity * assetPrice;
+            decimal assetPrice = _handler.GetLatestBars(fillEvent.Ticker)[0].Price;
+            decimal fillCost = fillEvent.Quantity * assetPrice;
 
             switch (fillEvent.OrderType)
             {
@@ -174,13 +180,13 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             switch (signalEvent.Direction)
             {
                 case SignalDirection.Long:
-                    double buyQuantity = Math.Floor(100 * signalEvent.Strenth);
+                    decimal buyQuantity = Math.Floor(100 * signalEvent.Strenth);
                     TradeEvent buyTrade = new TradeEvent(DateTime.Now,
                         signalEvent.Ticker, OrderType.Buy, buyQuantity);
                     return buyTrade;
 
                 case SignalDirection.Short:
-                    double sellQuantity = Math.Floor(100 * signalEvent.Strenth);
+                    decimal sellQuantity = Math.Floor(100 * signalEvent.Strenth);
                     TradeEvent sellTrade = new TradeEvent(DateTime.Now,
                         signalEvent.Ticker, OrderType.Buy, sellQuantity);
                     return sellTrade;
@@ -197,7 +203,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
 
         protected TradeEvent GetExitTradeEvent(string ticker)
         {
-            double exitQuantity = CurrentAllocation[ticker];
+            decimal exitQuantity = CurrentAllocation[ticker];
             if (exitQuantity < 0)
             {
                 TradeEvent exitBuyTrade = new TradeEvent(DateTime.Now,

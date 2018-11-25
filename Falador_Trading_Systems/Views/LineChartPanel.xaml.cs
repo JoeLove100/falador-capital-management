@@ -117,14 +117,14 @@ namespace FaladorTradingSystems.Views
             return output.ToArray<string>();
         }
 
-        private Series GetPriceDataSeries(List<double> priceValues)
+        private Series GetPriceDataSeries(List<decimal> priceValues)
         {
             Series output = new LineSeries
             {
                 PointGeometry = null
             };
             
-            var seriesValues = new ChartValues<double>();
+            var seriesValues = new ChartValues<decimal>();
             seriesValues.AddRange(priceValues);
             output.Values = seriesValues;
             output.Title = _selectedSeries;

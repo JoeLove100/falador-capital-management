@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace FaladorTradingSystems.Backtesting.Portfolio
 {
-    public class PortfolioValuation : Dictionary<string, double>
+    public class PortfolioValuation : Dictionary<string, decimal>
     {
 
         #region constructors
 
-        public PortfolioValuation(List<string> assets, double initialCapital)
+        public PortfolioValuation(List<string> assets, decimal initialCapital)
         {
             foreach(string asset in assets)
             {
@@ -23,9 +23,9 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         }
 
         public PortfolioValuation(List<string> assets, 
-            List<double> values,
-            double freeCash,
-            double commission)
+            List<decimal> values,
+            decimal freeCash,
+            decimal commission)
         {
             if (assets.Count != values.Count)
             {
@@ -46,18 +46,18 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
 
         #region properties
 
-        public double FreeCash { get; set; }
-        public double Commision { get; set; }
+        public decimal FreeCash { get; set; }
+        public decimal Commision { get; set; }
 
         #endregion
 
         #region methods
 
-        public double GetTotal()
+        public decimal GetTotal()
         {
-            double output = 0;
+            decimal output = 0;
 
-            foreach(KeyValuePair<string, double> kvp in this)
+            foreach(KeyValuePair<string, decimal> kvp in this)
             {
                 output += kvp.Value;
             }
@@ -71,9 +71,9 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         public PortfolioValuation Clone()
         {
             List<string> assets = new List<string>();
-            List<double> values = new List<double>();
+            List<decimal> values = new List<decimal>();
 
-            foreach(KeyValuePair<string, double> kvp in this)
+            foreach(KeyValuePair<string, decimal> kvp in this)
             {
                 assets.Add(kvp.Key);
                 values.Add(kvp.Value);

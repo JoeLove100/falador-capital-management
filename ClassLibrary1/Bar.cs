@@ -10,7 +10,7 @@ namespace Utils
     {
         #region constructors
 
-        public Bar(double price)
+        public Bar(decimal price)
         {
             Price = price;
         }
@@ -19,7 +19,7 @@ namespace Utils
 
         #region properties
 
-        public double Price { get; }
+        public decimal Price { get; }
 
         #endregion
 

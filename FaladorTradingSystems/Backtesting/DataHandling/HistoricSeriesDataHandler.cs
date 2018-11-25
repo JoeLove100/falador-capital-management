@@ -23,6 +23,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
             _dateEnumerator = _marketData.GetNextDate();
             AllAssets = _marketData.GetAllNames();
             _eventStack = eventStack;
+            ContinueBacktest = true;
         }
         #endregion
 
@@ -32,7 +33,6 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
         private IEnumerator<DateTime> _dateEnumerator { get; }
         private EventStack _eventStack { get; }
 
-        public EventQueue Events { get; set; }
         public DateTime CurrentDate { get; set; } 
         public List<string> AllAssets { get; set; }
         public bool ContinueBacktest { get; set; }
@@ -65,15 +65,17 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
             _eventStack.PutEvent(newDataArrived);
         }
 
-        public Dictionary<string, double> GetLastPrices()
+        public Dictionary<string, decimal> GetLastPrices()
         {
-            Dictionary<string, double> output = new Dictionary<string, double>();
+            Dictionary<string, decimal> output = new Dictionary<string, decimal>();
 
             foreach(string asset in AllAssets)
             {
                 Bar lastBar = GetLatestBars(asset, 1)[0];
                 output.Add(asset, lastBar.Price);
             }
+
+            output.Add("Free cash", 1);
 
             return output;
         }

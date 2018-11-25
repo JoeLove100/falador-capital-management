@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using FaladorTradingSystems.Backtesting;
 using FaladorTradingSystems.Backtesting.Strategies;
 using FaladorTradingSystems.Backtesting.Portfolio;
+using FaladorTradingSystems.Backtesting.DataHandling;
+using Utils;
 
 namespace FaladorTradingSystems.Views
 {
@@ -28,6 +30,8 @@ namespace FaladorTradingSystems.Views
         {
             BacktestingEngine = engine;
             InitializeComponent();
+
+            AddEventHandlers();
         }
         #endregion
 
@@ -52,15 +56,25 @@ namespace FaladorTradingSystems.Views
             ///to work
             ///</summary>
 
+            //TODO: these shoudld be arguments you can change in UI
+            DateTime startDate = new DateTime(2018, 1, 1);
+            DateTime endDate = new DateTime(2018, 6, 30);
+            DateRange range = new DateRange(startDate, endDate);
+
+            List<string> allowableAssets = new List<string>() { "Adamantite ore",
+            "Bronze bar", "Iron ore", "Rune bar"};
+
+            HistoricSeriesDataHandler handler =
+                BacktestingEngine.GetHistoricDataHandler(range, allowableAssets);
 
             StrategyBuyAndHold strategy = 
-                BacktestingEngine.GetBuyAndHoldStrategy();
+                BacktestingEngine.GetBuyAndHoldStrategy(handler);
 
-            DateTime startDate = new DateTime(2018, 1, 1);
             NaivePortfolio portfolio =
-                BacktestingEngine.GetNaivePortfolio(1000, startDate);
+                BacktestingEngine.GetNaivePortfolio(1000, startDate,
+                handler);
 
-            BacktestingEngine.RunBacktest(strategy, portfolio);
+            BacktestingEngine.RunBacktest(strategy, portfolio, handler);
 
         }
 

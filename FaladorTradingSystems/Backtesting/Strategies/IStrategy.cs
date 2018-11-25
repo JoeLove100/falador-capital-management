@@ -16,6 +16,5 @@ namespace FaladorTradingSystems.Backtesting.Strategies
     public interface IStrategy
     {
         void GenerateSignals(IEvent ev);
-        SortedList<DateTime, double> GetPerformanceHistory();
     }
 }

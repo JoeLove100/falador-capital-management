@@ -17,6 +17,7 @@ namespace FaladorTradingSystems.Backtesting.Events
 
         public EventStack()
         {
+            _eventStack = new Stack<IEvent>();
             _lockObject = new object();
         }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FaladorTradingSystems.Performance;
+using FaladorTradingSystems.Backtesting.Performance;
 using Utils;
 
 namespace Performance.Tests

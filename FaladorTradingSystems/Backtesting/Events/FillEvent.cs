@@ -15,7 +15,7 @@ namespace FaladorTradingSystems.Backtesting.Events
     {
         #region constructor
         public FillEvent(DateTime dateTimeFilled, OrderType direction, string ticker,
-            double quantity, Exchange exchange, double transactionCost)
+            decimal quantity, Exchange exchange, decimal transactionCost)
         {
             Type = EventType.FillEvent;
             DateTimeFilled = dateTimeFilled;
@@ -32,9 +32,9 @@ namespace FaladorTradingSystems.Backtesting.Events
         public DateTime DateTimeFilled { get; }
         public OrderType OrderType { get; }
         public string Ticker { get; }
-        public double Quantity { get; }
+        public decimal Quantity { get; }
         public Exchange Exchange { get; }
-        public double TransactionCost { get; }
+        public decimal TransactionCost { get; }
         #endregion 
 
     }

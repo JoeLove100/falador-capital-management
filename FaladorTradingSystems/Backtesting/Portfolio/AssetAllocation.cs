@@ -12,20 +12,24 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
     /// as opposed to value thereof)
     /// </summary>
 
-    public class AssetAllocation : Dictionary<string, double>
+    public class AssetAllocation : Dictionary<string, decimal>
     {
         #region constructors
 
-        public AssetAllocation(List<string> assets)
+        public AssetAllocation(List<string> assets, decimal initialCapital)
         {
             foreach (string asset in assets)
             {
                 this.Add(asset, 0);
             }
 
+            FreeCash = initialCapital;
+
+            Add("Free cash", FreeCash);
+
         }
 
-        public AssetAllocation(List<string> assets, List<double> positions)
+        public AssetAllocation(List<string> assets, List<decimal> positions)
         {
             if(assets.Count != positions.Count)
             {
@@ -39,12 +43,22 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             }
         }
 
+        #endregion
+
+        #region properties
+
+        public decimal FreeCash { get; set; }
+
+        #endregion 
+
+        #region methods
+
         public AssetAllocation Clone()
         {
             List<string> assets = new List<string>();
-            List<double> values = new List<double>();
+            List<decimal> values = new List<decimal>();
 
-            foreach(KeyValuePair<string, double> kvp in this)
+            foreach(KeyValuePair<string, decimal> kvp in this)
             {
                 assets.Add(kvp.Key);
                 values.Add(kvp.Value);

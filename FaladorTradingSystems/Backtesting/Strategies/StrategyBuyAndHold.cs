@@ -18,18 +18,22 @@ namespace FaladorTradingSystems.Backtesting.Strategies
     public class StrategyBuyAndHold : IStrategy
     {
         #region constructors
-        public StrategyBuyAndHold(IDataHandler dataHandler)
+        public StrategyBuyAndHold(IDataHandler dataHandler, EventStack events)
         {
-            _boughtAssets = dataHandler.AllAssets.ToDictionary(v => v, v => false);
+            _handler = dataHandler;
+            _allAssets = _handler.AllAssets;
+            _boughtAssets = _allAssets.ToDictionary(v => v, v => false);
+            _events = events;
         }
 
         #endregion
 
         #region properties
-
+           
         protected Dictionary<string, bool> _boughtAssets { get; set; }
+        protected List<string> _allAssets { get; }
         protected IDataHandler _handler { get; }
-        public SortedList<DateTime, SignalEvent> Signals { get; set; }
+        protected EventStack _events { get; set; }
 
         #endregion
 
@@ -39,7 +43,7 @@ namespace FaladorTradingSystems.Backtesting.Strategies
         {
             if (ev.Type != EventType.MarketEvent) return;
 
-            foreach(string asset in _boughtAssets.Keys)
+            foreach(string asset in _allAssets)
             {
                 if (_boughtAssets[asset]) continue;
 
@@ -47,11 +51,11 @@ namespace FaladorTradingSystems.Backtesting.Strategies
                 if (bars == null || bars.Length == 0) continue;
 
                 SignalEvent signal = new SignalEvent(DateTime.Now, asset,
-                    SignalDirection.Long, 0); //need to update the strength
+                    SignalDirection.Long, 100m); 
 
                 _boughtAssets[asset] = true;
 
-                Signals.Add(signal.DateTimeGenerated, signal);
+                _events.PutEvent(signal);
             }
             
         }

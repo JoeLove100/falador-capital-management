@@ -10,7 +10,7 @@ namespace FaladorTradingSystems.Backtesting.Events
     {
         #region constructor
         public TradeEvent(DateTime dateTimeGenerated, string ticker, OrderType orderType,
-            double quantity)
+            decimal quantity)
         {
             Type = EventType.TradeEvent;
             DateTimeGenerated = dateTimeGenerated;
@@ -25,7 +25,7 @@ namespace FaladorTradingSystems.Backtesting.Events
         public DateTime DateTimeGenerated { get; }
         public string Ticker { get; }
         public OrderType OrderType { get; }
-        public double Quantity { get; }
+        public decimal Quantity { get; }
         #endregion 
     }
 }

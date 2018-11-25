@@ -71,6 +71,13 @@ namespace Utils
             return Data.GetAllSymbols();
         }
 
+        public MarketData GetMarketDataInRange(DateRange range, List<string> allowableAssets)
+        {
+            AssetDataSeriesCollection seriesInRange =
+                Data.GetSubset(range, allowableAssets);
+
+            return new MarketData(seriesInRange);
+        }
 
         #endregion 
     }
@@ -89,6 +96,31 @@ namespace Utils
             foreach(AssetDataSeries series in this)
             {
                 output.Add(series.Name);
+            }
+
+            return output;
+        }
+
+        public AssetDataSeriesCollection GetSubset(DateRange dateRange,
+                                                   List<string> allowableAssets)
+        {
+            ///<summary>
+            ///gets the data in the given data range for
+            ///each data series in the collection
+            ///</summary>
+
+            var output = new AssetDataSeriesCollection();
+
+            if(allowableAssets is null)
+            {
+                allowableAssets = GetAllSymbols();
+            }
+            
+            foreach(AssetDataSeries series in this)
+            {
+                if (!allowableAssets.Contains(series.Name)) continue;
+                AssetDataSeries inRange = series.GetSubset(dateRange);
+                output.Add(inRange);
             }
 
             return output;

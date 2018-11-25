@@ -16,7 +16,7 @@ namespace FaladorTradingSystems.Backtesting.Events
         public SignalEvent(DateTime dateTimeGenerated, 
             string ticker, 
             SignalDirection direction,
-            double strength)
+            decimal strength)
         {
             Type = EventType.SignalEvent;
             DateTimeGenerated = dateTimeGenerated;
@@ -29,7 +29,7 @@ namespace FaladorTradingSystems.Backtesting.Events
         public DateTime DateTimeGenerated { get; }
         public string Ticker { get; }
         public SignalDirection Direction { get; }
-        public double Strenth { get; }
+        public decimal Strenth { get; }
 
     }
 }

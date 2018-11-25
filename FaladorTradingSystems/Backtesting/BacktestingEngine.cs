@@ -30,10 +30,11 @@ namespace FaladorTradingSystems.Backtesting
 
         #region constructor
 
-        public BacktestingEngine(EventStack eventStack, MarketData marketData)
+        public BacktestingEngine( MarketData marketData)
         {
-            DataHandler = new HistoricSeriesDataHandler(marketData, eventStack);
-            ExecutionHandler = new NaiveExecutionHandler(eventStack);
+            Events = new EventStack();
+            ExecutionHandler = new NaiveExecutionHandler(Events);
+            Data = marketData;
         }
 
         #endregion
@@ -41,77 +42,95 @@ namespace FaladorTradingSystems.Backtesting
         #region properties
 
         protected EventStack Events { get; }
-        public IDataHandler DataHandler { get; }
         protected IExecutionHandler ExecutionHandler { get; }
+        MarketData Data { get; }
 
         #endregion
 
         #region public methods
            
-        public void RunBacktest(IStrategy strategy,
-                                IPortfolio portfolio)
+        public IPortfolio RunBacktest(IStrategy strategy,
+                                IPortfolio portfolio,
+                                IDataHandler dataHandler)
         {
 
             while (true)
             {
-                if (!DataHandler.ContinueBacktest) break;
-                DataHandler.UpdateBars();
+                dataHandler.UpdateBars();
+                if (!dataHandler.ContinueBacktest) break;
 
                 IEvent latestEvent;
 
-                try
+                while (true)
                 {
-                    latestEvent = Events.GetEvent();
-                }
-                catch (InvalidOperationException)
-                {
-                    break;
-                }
+                    try
+                    {
+                        latestEvent = Events.GetEvent();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        break;
+                    }
 
-                switch (latestEvent.Type)
-                {
-                    case EventType.MarketEvent:
-                        MarketEvent marketEv = (MarketEvent)latestEvent;
-                        HandleMarketEvent(marketEv, strategy, portfolio);
-                        continue;
-                    case EventType.SignalEvent:
-                        SignalEvent signalEv = (SignalEvent)latestEvent;
-                        HandleSignalEvent(signalEv, portfolio);
-                        continue;
-                    case EventType.TradeEvent:
-                        TradeEvent tradeEv = (TradeEvent)latestEvent;
-                        HandleTradeEvent(tradeEv);
-                        break;
-                    case EventType.FillEvent:
-                        FillEvent fillEv = (FillEvent)latestEvent;
-                        HandleFillEvent(fillEv, portfolio);
-                        break;
-                    default:
-                        throw new ArgumentException("Unkown even type!");
+                    switch (latestEvent.Type)
+                    {
+                        case EventType.MarketEvent:
+                            MarketEvent marketEv = (MarketEvent)latestEvent;
+                            HandleMarketEvent(marketEv, strategy, portfolio);
+                            continue;
+                        case EventType.SignalEvent:
+                            SignalEvent signalEv = (SignalEvent)latestEvent;
+                            HandleSignalEvent(signalEv, portfolio);
+                            continue;
+                        case EventType.TradeEvent:
+                            TradeEvent tradeEv = (TradeEvent)latestEvent;
+                            HandleTradeEvent(tradeEv);
+                            break;
+                        case EventType.FillEvent:
+                            FillEvent fillEv = (FillEvent)latestEvent;
+                            HandleFillEvent(fillEv, portfolio);
+                            break;
+                        default:
+                            throw new ArgumentException("Unkown even type!");
+                    }
                 }
 
                 Thread.Sleep(_modelHeartbeat);
             }
 
+            return portfolio;
+
         }
 
-        public StrategyBuyAndHold GetBuyAndHoldStrategy()
+        public StrategyBuyAndHold GetBuyAndHoldStrategy(IDataHandler dataHandler)
         {
             StrategyBuyAndHold output =
-                new StrategyBuyAndHold(DataHandler);
+                new StrategyBuyAndHold(dataHandler, Events);
 
             return output;
         }
 
         public NaivePortfolio GetNaivePortfolio(
-            double initialCapital, 
-            DateTime startDate)
+            decimal initialCapital, 
+            DateTime startDate,
+            IDataHandler dataHandler)
         {
             NaivePortfolio output =
                 new NaivePortfolio(initialCapital, startDate,
-                DataHandler, Events);
+                dataHandler, Events);
 
             return output;
+        }
+
+        public HistoricSeriesDataHandler GetHistoricDataHandler(DateRange range, 
+                                                                List<string> allowableAssets = null)
+        {
+            MarketData data = Data.GetMarketDataInRange(range, allowableAssets);
+
+            HistoricSeriesDataHandler handler =
+                new HistoricSeriesDataHandler(data, Events);
+
+            return handler;
         }
 
 
@@ -130,7 +149,7 @@ namespace FaladorTradingSystems.Backtesting
         protected void HandleSignalEvent(SignalEvent signalEv, 
             IPortfolio portfolio)
         {
-            portfolio.UpdateForSignals(signalEv);
+            portfolio.GetTradesForSignal(signalEv);
         }
 
         protected void HandleTradeEvent(TradeEvent tradeEv)

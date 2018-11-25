@@ -68,9 +68,9 @@ namespace Utils
             return output;
         }
     
-        public List<double> GetPricesInOrder()
+        public List<decimal> GetPricesInOrder()
         {
-            List<double> output = new List<double>();
+            List<decimal> output = new List<decimal>();
 
             foreach(KeyValuePair<DateTime, Bar> kvp in this.OrderBy(key => key.Key))
             {

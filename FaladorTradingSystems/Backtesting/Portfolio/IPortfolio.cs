@@ -14,7 +14,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
     /// </summary>
     public interface IPortfolio
     {
-        void UpdateForSignals(SignalEvent singalEvent);
+        void GetTradesForSignal(SignalEvent singalEvent);
         void UpdateHoldingsForFill(FillEvent fillEvent);
         void UpdateForMarketData(MarketEvent marketEvent);
     }

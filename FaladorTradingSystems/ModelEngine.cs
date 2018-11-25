@@ -19,7 +19,7 @@ namespace FaladorTradingSystems
         public ModelEngine()
         {
             MarketData = LoadMarketData();
-            BacktestingEngine = new BacktestingEngine(new EventStack(), MarketData);
+            BacktestingEngine = new BacktestingEngine(MarketData);
         }
 
         #endregion

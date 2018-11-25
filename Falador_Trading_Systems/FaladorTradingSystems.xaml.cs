@@ -56,7 +56,7 @@ namespace FaladorTradingSystems
             ChartPanelAssetPrice.InitialiseChart(Engine.MarketData);
             ChartPanelAssetPrice.PlotLineChart();
 
-            ChartPanelBacktesting = new BacktestingPanel();
+            ChartPanelBacktesting = new BacktestingPanel(Engine.BacktestingEngine);
             ChartPanelNewsfeed = new NewsfeedPanel();
             ChartPanelPortfolio = new PortfolioManagementPanel();
         }
