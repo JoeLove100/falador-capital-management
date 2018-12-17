@@ -46,6 +46,8 @@ namespace FaladorTradingSystems
         protected NewsfeedPanel ChartPanelNewsfeed;
         protected PortfolioManagementPanel ChartPanelPortfolio;
 
+        protected SubMenuPanelBacktest SubMenuItem;
+
         #endregion
 
         #region methods
@@ -74,6 +76,7 @@ namespace FaladorTradingSystems
         private void ChangeView(object sender, AssumptionChangedEventArgs e)
         {
             ViewType viewType = MenuItemMain.GetSelectedView();
+            SubMenuItem = new SubMenuPanelBacktest();
             switch (viewType)
             {
                 case ViewType.AssetPrice:

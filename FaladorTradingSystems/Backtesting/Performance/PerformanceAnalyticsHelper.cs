@@ -37,21 +37,21 @@ namespace FaladorTradingSystems.Backtesting.Performance
         private readonly static double tol = 0.05;
         #endregion 
 
-        public static double GetStandardDeviation(IList<double> data)
+        public static decimal GetStandardDeviation(IList<decimal> data)
         {
             ///<summary>
             ///Compute the standard deviation of a set of 
             ///numbers using Welfords method
             ///</summary>
 
-            double m = data[0];
+            double m = (double) data[0];
             double tempM;
             double s = 0;
             int count = 1;
 
             while (count < data.Count())
             {
-                double x = data[count];
+                double x = (double) data[count];
                 tempM = m;
                 m = tempM + (x - tempM) / (count + 1);
                 s = s + (x - m) * (x - tempM);
@@ -59,7 +59,7 @@ namespace FaladorTradingSystems.Backtesting.Performance
                 count++;
             }
 
-            double sd =  Math.Sqrt(s / (count - 1));
+            decimal sd =  (decimal) Math.Sqrt(s / (count - 1));
             return sd;
         }
 
@@ -90,78 +90,80 @@ namespace FaladorTradingSystems.Backtesting.Performance
 
         }
 
-        public static double GetAnnualisedVol(SortedList<DateTime, double> returns)
+        public static decimal GetAnnualisedVol(SortedList<DateTime, decimal> returns)
         {
             ///<summary>
             ///returns the annualised volatililty of the NATURAL LOG of
             ///a time series of returns
             ///</summary>
 
-            double[] logReturns = new double[returns.Count];
+            double [] logReturns = new double [returns.Count];
 
             for(int i = 0; i < returns.Count; i++)
             {
-                logReturns[i] = Math.Log(returns.Values[i]);
+                logReturns[i] = Math.Log( (double) returns.Values[i]);
             }
 
-            double vol = GetStandardDeviation(returns.Values);
+            decimal vol = GetStandardDeviation(returns.Values);
 
-            double annualisingConst = 
+            decimal annualisingConst = 
                 GetAnnualisingConstant(returns.Keys.ToList());
 
-            return vol * Math.Sqrt(annualisingConst);
+            annualisingConst = (decimal)Math.Sqrt((double)annualisingConst);
+
+            return vol * annualisingConst;
 
 
         }
 
-        public static double GetDownsideDeviation(
-            IList<double> returns, double threshold)
+        public static decimal GetDownsideDeviation(
+            IList<decimal> returns, decimal threshold)
         {
             ///<summary>
             ///Get the vol of the returns below the 
             ///threshold, with returns above the threshold
             ///capped to the theshold level
             ///</summary>
-            IList<double> cappedReturns = returns.Cap(threshold);
-            double downVol = GetStandardDeviation(cappedReturns);
+            IList<decimal> cappedReturns = returns.Cap(threshold);
+            decimal downVol = GetStandardDeviation(cappedReturns);
 
             return downVol;
         }
 
-        public static double GetSharpeRatio(SortedList<DateTime, double> returns,
-            double riskFreeRate=0)
+        public static decimal GetSharpeRatio(SortedList<DateTime, decimal> returns,
+            decimal riskFreeRate=0)
         {
             ///<summary>
             ///Returns the sharpe ratio 
             ///Info: https://en.wikipedia.org/wiki/Sharpe_ratio
             ///</summary>
 
-            double vol = GetAnnualisedVol(returns);
-            double[] excessReturns = (double[]) returns.Values.Subtract(riskFreeRate);
-            double avgExcess = excessReturns.Average();
-            double scaling = GetAnnualisingConstant(returns.Keys);
+            decimal vol = GetAnnualisedVol(returns);
+            decimal[] excessReturns = (decimal[]) returns.Values.Subtract(riskFreeRate);
+            decimal avgExcess = excessReturns.Average();
+            decimal scaling = GetAnnualisingConstant(returns.Keys);
 
-            double sharpeRatio = avgExcess * scaling / vol;
+            decimal sharpeRatio = avgExcess * scaling / vol;
 
             return sharpeRatio;
         }
 
-        public static double GetSortinoRatio(SortedList<DateTime, double> returns,
-            double threshold)
+        public static decimal GetSortinoRatio(SortedList<DateTime, decimal> returns,
+            decimal threshold)
         {
             ///<summary>
             ///Returns the sortino ratio
             ///Info: https://en.wikipedia.org/wiki/Sortino_ratio
             ///</summary>
 
-            double downVol = GetDownsideDeviation(returns.Values, threshold);
-            double[] excessReturns = (double[])returns.Values.Subtract(threshold);
-            double avgExcess = excessReturns.Average();
+            decimal downVol = GetDownsideDeviation(returns.Values, threshold);
+            decimal[] excessReturns = (decimal[])returns.Values.Subtract(threshold);
+            decimal avgExcess = excessReturns.Average();
 
-            double annualisingConstant = 
-                Math.Sqrt(GetAnnualisingConstant(returns.Keys));
+            decimal annualisingConstant = (decimal)
+                Math.Sqrt( (double) GetAnnualisingConstant(returns.Keys));
 
-            double sortinoRatio = avgExcess * annualisingConstant / downVol;
+            decimal sortinoRatio = avgExcess * annualisingConstant / downVol;
             return sortinoRatio;
         }
 

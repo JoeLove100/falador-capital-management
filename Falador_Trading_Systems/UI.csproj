@@ -34,6 +34,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
@@ -98,6 +118,18 @@
     <Compile Include="MenuItems\SubMenuPanel.xaml.cs">
       <DependentUpon>SubMenuPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuItems\SubMenuPanelBacktest.xaml.cs">
+      <DependentUpon>SubMenuPanelBacktest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuItems\SubMenuPanelHistoric.xaml.cs">
+      <DependentUpon>SubMenuPanelHistoric.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuItems\SubMenuPanelNewsfeed.xaml.cs">
+      <DependentUpon>SubMenuPanelNewsfeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuItems\SubMenuPanelPortfolio.xaml.cs">
+      <DependentUpon>SubMenuPanelPortfolio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewsfeedPanel.xaml.cs">
       <DependentUpon>NewsfeedPanel.xaml</DependentUpon>
     </Compile>
@@ -107,6 +139,22 @@
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MenuItems\SubMenuPanelBacktest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuItems\SubMenuPanelHistoric.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuItems\SubMenuPanelNewsfeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuItems\SubMenuPanelPortfolio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DateRangeBar.xaml">
       <SubType>Designer</SubType>

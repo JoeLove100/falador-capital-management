@@ -119,6 +119,18 @@ namespace Utils
             return output;
         }
 
+        public static string[] GetDatesAsStrings(List<DateTime> dates)
+        {
+            List<string> output = new List<string>();
+
+            for (int i = 0; i < dates.Count; i++)
+            {
+                output.Add(dates[i].ToShortDateString());
+            }
+
+            return output.ToArray<string>();
+        }
+
         #endregion
 
         #region private methods

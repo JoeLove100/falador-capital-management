@@ -57,12 +57,16 @@
     <Compile Include="Backtesting\Events\TradeEvent.cs" />
     <Compile Include="Backtesting\Execution\IExecutionHandler.cs" />
     <Compile Include="Backtesting\Execution\NaiveExecutionHandler.cs" />
+    <Compile Include="Backtesting\Strategies\StrategyType.cs" />
     <Compile Include="ModelEngine.cs" />
     <Compile Include="Backtesting\Performance\PerformanceAnalyticsHelper.cs" />
     <Compile Include="Backtesting\Portfolio\AssetAllocation.cs" />
     <Compile Include="Backtesting\Portfolio\IPortfolio.cs" />
     <Compile Include="Backtesting\Portfolio\NaivePortfolio.cs" />
     <Compile Include="Backtesting\Portfolio\PortfolioValuation.cs" />
+    <Compile Include="PanelSettings\BacktestSettings.cs" />
+    <Compile Include="PanelSettings\IPanelSettings.cs" />
+    <Compile Include="PanelSettings\ISettingsPanel.cs" />
     <Compile Include="ProjectParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Backtesting\Strategies\IStrategy.cs" />

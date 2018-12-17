@@ -29,7 +29,7 @@ namespace Tests
         public void CheckSame_DifferentPrice_ReturnFalse()
         {
             //arrange
-            Bar bar = new Bar(0.9);
+            Bar bar = new Bar(0.9m);
             Bar barTwo = new Bar(1);
 
             //act 

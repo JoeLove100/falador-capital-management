@@ -105,6 +105,20 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             _eventStack.PutEvent(tradeEvent);
         }
 
+        public SortedList<DateTime, decimal> GetReturnSeries()
+        {
+            var valuations = new SortedList<DateTime, decimal>();
+
+            foreach(KeyValuePair<DateTime, PortfolioValuation> kvp in ValuationHistory)
+            {
+                valuations.Add(kvp.Key, kvp.Value.GetTotal());
+            }
+
+            var output = (SortedList<DateTime, decimal>) valuations.PriceToScaledCumulativeReturns(100);
+
+            return output;
+        }
+
         #endregion
 
         #region protected methods
@@ -136,11 +150,9 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             {
                 case OrderType.Buy:
                     CurrentAllocation[fillEvent.Ticker] += fillEvent.Quantity;
-                    CurrentAllocation["Free cash"] -= fillEvent.Quantity;
                     break;
                 case OrderType.Sell:
                     CurrentAllocation[fillEvent.Ticker] -= fillEvent.Quantity;
-                    CurrentAllocation["Free cash"] += fillEvent.Quantity;
                     break;
                 default:
                     throw new ArgumentException($"Uknown order type placed " +
@@ -157,10 +169,14 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
             switch (fillEvent.OrderType)
             {
                 case OrderType.Buy:
-                    CurrentValuation[fillEvent.Ticker] += assetPrice;
+                    CurrentValuation[fillEvent.Ticker] += fillCost;
+                    CurrentValuation.FreeCash -= fillCost;
+                    CurrentAllocation.FreeCash -= fillCost;
                     break;
                 case OrderType.Sell:
-                    CurrentValuation[fillEvent.Ticker] -= assetPrice;
+                    CurrentValuation[fillEvent.Ticker] -= fillCost;
+                    CurrentValuation.FreeCash += fillCost;
+                    CurrentAllocation.FreeCash += fillCost;
                     break;
                 default:
                     throw new ArgumentException($"Unknown order type placed" +

@@ -4,10 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FaladorTradingSystems"
+             xmlns:subs="clr-namespace:FaladorTradingSystems.MenuItems"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="100">
-    <Grid Background="LightBlue">
-        <StackPanel  Name="StackControls">
-        </StackPanel>  
+    <Grid Background="LightBlue" Name= "GridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Column="1" Grid.Row="1"
+                        Name = "ContentControlMain"
+                        Content= "{Binding}"
+                        Margin="0,0,0,0">
+        </ContentControl>
+
+        <Grid.Resources>
+            <DataTemplate DataType = "{x:Type subs:SubMenuPanelBacktest}">
+                <subs:SubMenuPanelBacktest DataContext="{Binding}"></subs:SubMenuPanelBacktest>
+            </DataTemplate>
+        </Grid.Resources>
     </Grid>
 </local:ObservableControl>

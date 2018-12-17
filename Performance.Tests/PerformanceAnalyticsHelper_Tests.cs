@@ -10,9 +10,10 @@ using Utils;
 namespace Performance.Tests
 {
     [TestClass()]
-
     public class PerformanceAnalyticsHelper_Tests
     {
+        private static readonly decimal tol = 1e-5m;
+
         [TestMethod()]
         public void GetAnnualisingConstant_Daily_Returns252()
         {
@@ -81,32 +82,32 @@ namespace Performance.Tests
         public void GetStandardDeviation_GetSD_ReturnsSD()
         {
             //arrange
-            List<double> numbers = new List<double> { 1, 1.3,
-            3.4, 2.3, 1.6, 3.4, 0.8, 0.7, 0.1, -1, 3.5, 2.1,
-            2.7};
+            List<decimal> numbers = new List<decimal> { 1, 1.3m,
+            3.4m, 2.3m, 1.6m, 3.4m, 0.8m, 0.7m, 0.1m, -1, 3.5m, 2.1m,
+            2.7m};
 
             //act
-            double sd =
+            decimal sd =
                 PerformanceAnalyticsHelper.GetStandardDeviation(numbers);
 
             //assert
-            Assert.AreEqual(1.380124, sd, 1e-5);
+            Assert.IsTrue(Math.Abs(1.380124m - sd) < tol);
         }
 
         [TestMethod()]
         public void GetDownsideDeviation_GetDD_ReturnsDD()
         {
             //arrange
-            List<double> numbers = new List<double> { 1, 1.3,
-            3.4, 2.3, 1.6, 3.4, 0.8, 0.7, 0.1, -1, 3.5, 2.1,
-            2.7};
+            List<decimal> numbers = new List<decimal> { 1, 1.3m,
+            3.4m, 2.3m, 1.6m, 3.4m, 0.8m, 0.7m, 0.1m, -1, 3.5m, 2.1m,
+            2.7m};
 
             //act
-            double dd =
+            decimal dd =
                 PerformanceAnalyticsHelper.GetDownsideDeviation(numbers, 2);
 
             //assert
-            Assert.AreEqual(0.933081, dd, 1e-5);
+            Assert.IsTrue(Math.Abs(0.933081m - dd) < tol);
         }
 
         [TestMethod()]
@@ -118,11 +119,11 @@ namespace Performance.Tests
             List<DateTime> dates = 
                 (List<DateTime>) DateRange.GetMonthEndsBetween(startDate, endDate);
 
-            List<double> numbers = new List<double> { 1, 1.3,
-            3.4, 2.3, 1.6, 3.4, 0.8, 0.7, 0.1, -1, 3.5, 2.1,
-            2.7};
+            List<decimal> numbers = new List<decimal> { 1, 1.3m,
+            3.4m, 2.3m, 1.6m, 3.4m, 0.8m, 0.7m, 0.1m, -1, 3.5m, 2.1m,
+            2.7m};
 
-            SortedList<DateTime, double> returnSeries = new SortedList<DateTime, double>();
+            SortedList<DateTime, decimal> returnSeries = new SortedList<DateTime, decimal>();
 
             for(int i = 0; i < dates.Count(); i++)
             {
@@ -130,10 +131,10 @@ namespace Performance.Tests
             }
 
             //act
-            double annualVol = PerformanceAnalyticsHelper.GetAnnualisedVol(returnSeries);
+            decimal annualVol = PerformanceAnalyticsHelper.GetAnnualisedVol(returnSeries);
 
             //assert
-            Assert.AreEqual(4.780891, annualVol, 1e-5);
+            Assert.IsTrue(Math.Abs(4.780891m -  annualVol) <  tol);
         }
 
         [TestMethod()]
@@ -145,11 +146,11 @@ namespace Performance.Tests
             List<DateTime> dates =
                 (List<DateTime>)DateRange.GetDaysBetween(startDate, endDate);
 
-            List<double> numbers = new List<double> { 1, 1.3,
-            3.4, 2.3, 1.6, 3.4, 0.8, 0.7, 0.1, -1, 3.5, 2.1,
-            2.7};
+            List<decimal> numbers = new List<decimal> { 1, 1.3m,
+            3.4m, 2.3m, 1.6m, 3.4m, 0.8m, 0.7m, 0.1m, -1, 3.5m, 2.1m,
+            2.7m};
 
-            SortedList<DateTime, double> returnSeries = new SortedList<DateTime, double>();
+            SortedList<DateTime, decimal> returnSeries = new SortedList<DateTime, decimal>();
 
             for (int i = 0; i < dates.Count(); i++)
             {
@@ -157,10 +158,10 @@ namespace Performance.Tests
             }
 
             //act
-            double annualVol = PerformanceAnalyticsHelper.GetAnnualisedVol(returnSeries);
+            decimal annualVol = PerformanceAnalyticsHelper.GetAnnualisedVol(returnSeries);
 
             //assert
-            Assert.AreEqual(21.90880, annualVol, 1e-5);
+            Assert.IsTrue(Math.Abs(21.90880m - annualVol) < tol);
         }
         
         [TestMethod()]
@@ -172,11 +173,11 @@ namespace Performance.Tests
             List<DateTime> dates =
                 (List<DateTime>)DateRange.GetMonthEndsBetween(startDate, endDate);
 
-            List<double> numbers = new List<double> { 1, 1.3,
-            3.4, 2.3, 1.6, 3.4, 0.8, 0.7, 0.1, -1, 3.5, 2.1,
-            2.7};
+            List<decimal> numbers = new List<decimal> { 1, 1.3m,
+            3.4m, 2.3m, 1.6m, 3.4m, 0.8m, 0.7m, 0.1m, -1, 3.5m, 2.1m,
+            2.7m};
 
-            SortedList<DateTime, double> returnSeries = new SortedList<DateTime, double>();
+            SortedList<DateTime, decimal> returnSeries = new SortedList<DateTime, decimal>();
 
             for (int i = 0; i < dates.Count(); i++)
             {
@@ -184,11 +185,11 @@ namespace Performance.Tests
             }
 
             //act
-            double sharpe =
+            decimal sharpe =
                 PerformanceAnalyticsHelper.GetSharpeRatio(returnSeries, 1);
 
             //assert
-            Assert.AreEqual(1.718379, sharpe, 1e-5);
+            Assert.IsTrue(Math.Abs(1.718379m - sharpe) < tol);
         }
 
         [TestMethod()]
@@ -200,11 +201,11 @@ namespace Performance.Tests
             List<DateTime> dates =
                 (List<DateTime>)DateRange.GetMonthEndsBetween(startDate, endDate);
 
-            List<double> numbers = new List<double> { 1, 1.3,
-            3.4, 2.3, 1.6, 3.4, 0.8, 0.7, 0.1, -1, 3.5, 2.1,
-            2.7};
+            List<decimal> numbers = new List<decimal> { 1, 1.3m,
+            3.4m, 2.3m, 1.6m, 3.4m, 0.8m, 0.7m, 0.1m, -1, 3.5m, 2.1m,
+            2.7m};
 
-            SortedList<DateTime, double> returnSeries = new SortedList<DateTime, double>();
+            SortedList<DateTime, decimal> returnSeries = new SortedList<DateTime, decimal>();
 
             for (int i = 0; i < dates.Count(); i++)
             {
@@ -212,11 +213,11 @@ namespace Performance.Tests
             }
 
             //act
-            double sortino =
+            decimal sortino =
                 PerformanceAnalyticsHelper.GetSortinoRatio(returnSeries, 2);
 
             //assert
-            Assert.AreEqual(-1.17088, sortino, 1e-5);
+            Assert.IsTrue(Math.Abs(-1.17088m - sortino) <  tol);
         }
 
 

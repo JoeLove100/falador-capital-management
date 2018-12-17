@@ -17,5 +17,7 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
         void GetTradesForSignal(SignalEvent singalEvent);
         void UpdateHoldingsForFill(FillEvent fillEvent);
         void UpdateForMarketData(MarketEvent marketEvent);
+
+        SortedList<DateTime, decimal> GetReturnSeries();
     }
 }

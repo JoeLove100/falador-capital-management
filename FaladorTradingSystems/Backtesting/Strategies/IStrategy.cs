@@ -16,5 +16,9 @@ namespace FaladorTradingSystems.Backtesting.Strategies
     public interface IStrategy
     {
         void GenerateSignals(IEvent ev);
+
+        string Name { get; }
+
+        StrategyType TypeOfStrategy { get; }
     }
 }

@@ -85,14 +85,29 @@ namespace FaladorTradingSystems.Views
             DateRange selectedRange = DateRangeControl.GetSettings();
             AssetDataSeries priceSeries = selectedSeries.GetSubset(selectedRange);
 
-            Labels = GetDateArray(priceSeries.Keys.ToList());
+            Labels = DateRange.GetDatesAsStrings(priceSeries.Keys.ToList());
             OnPropertyChanged("Labels");
             Series.Clear();
-            Series.Add( GetPriceDataSeries(priceSeries.GetPricesInOrder()));
+            Series.Add( GetPriceDataSeries(priceSeries.GetPricesInOrder(), _selectedSeries));
 
             Formatter = value => String.Format("{0:0,0}", value);
         }
 
+        public static Series GetPriceDataSeries(IList<decimal> priceValues,
+                                                string title)
+        {
+            Series output = new LineSeries
+            {
+                PointGeometry = null
+            };
+
+            var seriesValues = new ChartValues<decimal>();
+            seriesValues.AddRange(priceValues);
+            output.Values = seriesValues;
+            output.Title = title;
+
+            return output;
+        }
 
         #endregion
 
@@ -105,32 +120,6 @@ namespace FaladorTradingSystems.Views
             DateRangeControl.InitialiseControls(range);
         }
 
-        private string[] GetDateArray(List<DateTime> dates)
-        {
-            List<string> output = new List<string>();
-
-            for(int i = 0; i < dates.Count; i++)
-            {
-                output.Add(dates[i].ToShortDateString());
-            }
-
-            return output.ToArray<string>();
-        }
-
-        private Series GetPriceDataSeries(List<decimal> priceValues)
-        {
-            Series output = new LineSeries
-            {
-                PointGeometry = null
-            };
-            
-            var seriesValues = new ChartValues<decimal>();
-            seriesValues.AddRange(priceValues);
-            output.Values = seriesValues;
-            output.Title = _selectedSeries;
-
-            return output;
-        }
 
         private void AddEventHandlers()
         {

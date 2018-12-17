@@ -17,38 +17,89 @@ using FaladorTradingSystems.Backtesting.Strategies;
 using FaladorTradingSystems.Backtesting.Portfolio;
 using FaladorTradingSystems.Backtesting.DataHandling;
 using Utils;
+using LiveCharts.Wpf;
+using LiveCharts;
 
 namespace FaladorTradingSystems.Views
 {
     /// <summary>
     /// Interaction logic for BacktestingPanel.xaml
     /// </summary>
-    public partial class BacktestingPanel : UserControl
+    public partial class BacktestingPanel : ObservableControl
     {
         #region constructors
         public BacktestingPanel(BacktestingEngine engine)
         {
             BacktestingEngine = engine;
             InitializeComponent();
-
+            Series = new SeriesCollection();
             AddEventHandlers();
+        }
+
+        public BacktestingPanel()
+        {
+            InitializeComponent();
         }
         #endregion
 
-        #region properties
+        #region engine properties
 
-        BacktestingEngine BacktestingEngine { get; }
+        protected BacktestingEngine BacktestingEngine { get; }
+        protected string BacktestString { get; set; }
 
         #endregion
 
-        #region methods
+        #region chart properties
+
+        protected IPortfolio _currentBacktestResult;
+        protected string _lastSeriesName;
+        protected string[] _labels;
+        protected Func<double, string> _formatter;
+
+        public SeriesCollection Series { get; set; }
+        public Func<double, string> Formatter 
+        {
+            get
+            {
+                return _formatter;
+            }
+
+            set
+            {
+                _formatter = value;
+                OnPropertyChanged("Formatter");
+            }
+        }
+        public string[] Labels
+        {
+            get
+            {
+                return _labels;
+            }
+            set
+            {
+                _labels = value;
+                OnPropertyChanged("Labels");
+            }
+        }
+
+
+        #endregion 
+
+        #region  backtest methods
 
         public void AddEventHandlers()
         {
-            ButtonBacktest.Click += RunBacktest;
+            ButtonBacktest.Click += HandleBacktest;
         }
 
-        private void RunBacktest(object sender, RoutedEventArgs e)
+        protected void HandleBacktest(object sender, EventArgs e)
+        {
+            RunBacktest();
+            ChartBacktestResult(_currentBacktestResult);
+        }
+
+        private void RunBacktest()
         {
             ///<summary>
             ///temp method while I figure out
@@ -71,14 +122,47 @@ namespace FaladorTradingSystems.Views
                 BacktestingEngine.GetBuyAndHoldStrategy(handler);
 
             NaivePortfolio portfolio =
-                BacktestingEngine.GetNaivePortfolio(1000, startDate,
+                BacktestingEngine.GetNaivePortfolio(1e10m, startDate,
                 handler);
 
-            BacktestingEngine.RunBacktest(strategy, portfolio, handler);
+            IPortfolio result = BacktestingEngine.RunBacktest(strategy, portfolio, handler);
+
+            _currentBacktestResult = result;
+            _lastSeriesName = strategy.Name;
 
         }
 
         #endregion
+
+        #region chart methods
+
+        protected void ChartBacktestResult(IPortfolio resultingPortfolio)
+        {
+            ///<summary>
+            ///produces a chart of the returns on the 
+            ///resulting portfolio
+            ///</summary>
+            ///
+
+
+            if (_currentBacktestResult == null)
+            {
+                return;
+            }
+
+            var returnSeries = _currentBacktestResult.GetReturnSeries();
+
+            Labels = DateRange.GetDatesAsStrings(returnSeries.Keys.ToList());
+            Series.Clear();
+            Series.Add(LineChartPanel.GetPriceDataSeries(returnSeries.Values,
+                _lastSeriesName));
+
+            Formatter = value => String.Format("{0:P2}", value);
+            OnPropertyChanged("Formatter");
+        }
+
+
+        #endregion 
 
 
     }

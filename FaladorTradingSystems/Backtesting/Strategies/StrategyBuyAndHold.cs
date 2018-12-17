@@ -14,7 +14,7 @@ namespace FaladorTradingSystems.Backtesting.Strategies
     /// as the corresponding bar is received - primarily a
     /// test/benchmarking strategy
     /// </summary>
-    
+
     public class StrategyBuyAndHold : IStrategy
     {
         #region constructors
@@ -24,16 +24,22 @@ namespace FaladorTradingSystems.Backtesting.Strategies
             _allAssets = _handler.AllAssets;
             _boughtAssets = _allAssets.ToDictionary(v => v, v => false);
             _events = events;
+
+            Name = @"buy and hold strategy";
+            TypeOfStrategy = StrategyType.BuyAndHold;
         }
 
         #endregion
 
         #region properties
-           
+
         protected Dictionary<string, bool> _boughtAssets { get; set; }
         protected List<string> _allAssets { get; }
         protected IDataHandler _handler { get; }
         protected EventStack _events { get; set; }
+
+        public string Name { get; }
+        public StrategyType TypeOfStrategy {get;}
 
         #endregion
 

@@ -25,8 +25,6 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
 
             FreeCash = initialCapital;
 
-            Add("Free cash", FreeCash);
-
         }
 
         public AssetAllocation(List<string> assets, List<decimal> positions)
@@ -64,7 +62,13 @@ namespace FaladorTradingSystems.Backtesting.Portfolio
                 values.Add(kvp.Value);
             }
 
-            return new AssetAllocation(assets, values);
+
+
+            var assetAllocations = new  AssetAllocation(assets, values);
+
+            assetAllocations.FreeCash = FreeCash;
+
+            return assetAllocations;
         }
 
         #endregion 

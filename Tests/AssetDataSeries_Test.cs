@@ -22,7 +22,7 @@ namespace Tests
             DateRange rangeLow = new DateRange(dateStart, dateEnd);
 
             DateTime[] dates = new DateTime[6];
-            double[] values = new double[] { 1, 2, 3, 4, 5, 6 };
+            decimal[] values = new decimal[] { 1, 2, 3, 4, 5, 6 };
             Bar[] bars = new Bar[6];
 
             for (int i = 1; i < 7; i++)
@@ -54,7 +54,7 @@ namespace Tests
             DateRange rangeHigh = new DateRange(dateStart, dateEnd);
 
             DateTime[] dates = new DateTime[6];
-            double[] values = new double[] { 1, 2, 3, 4, 5, 6 };
+            decimal[] values = new decimal[] { 1, 2, 3, 4, 5, 6 };
             Bar[] bars = new Bar[6];
 
             for (int i = 1; i < 7; i++)
@@ -85,7 +85,7 @@ namespace Tests
             DateRange range = new DateRange(dateStart, dateEnd);
 
             DateTime[] dates = new DateTime[6];
-            double[] values = new double[] { 1, 2, 3, 4, 5, 6 };
+            decimal[] values = new decimal[] { 1, 2, 3, 4, 5, 6 };
             Bar[] bars = new Bar[6];
 
             for (int i = 1; i < 7; i++)
@@ -211,7 +211,7 @@ namespace Tests
             List<double> expectedOrderedPrices = new List<double> { 11, 12, 10 };
 
             //act
-            List<double> orderedEntries = series1.GetPricesInOrder();
+            List<decimal> orderedEntries = series1.GetPricesInOrder();
 
             //assert
             CollectionAssert.AreEqual(orderedEntries, expectedOrderedPrices);

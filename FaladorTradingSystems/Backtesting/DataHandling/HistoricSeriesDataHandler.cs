@@ -62,7 +62,7 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
             ContinueBacktest = _dateEnumerator.MoveNext();
             CurrentDate = _dateEnumerator.Current;
             MarketEvent newDataArrived= new MarketEvent();
-            _eventStack.PutEvent(newDataArrived);
+            if(ContinueBacktest) _eventStack.PutEvent(newDataArrived);
         }
 
         public Dictionary<string, decimal> GetLastPrices()
@@ -74,8 +74,6 @@ namespace FaladorTradingSystems.Backtesting.DataHandling
                 Bar lastBar = GetLatestBars(asset, 1)[0];
                 output.Add(asset, lastBar.Price);
             }
-
-            output.Add("Free cash", 1);
 
             return output;
         }

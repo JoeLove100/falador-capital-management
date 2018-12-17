@@ -19,13 +19,13 @@ namespace Utils
                 && Comparer<T>.Default.Compare(item, end) <= 0;
         }
 
-        public static IList<double> Subtract(this IList<double> items, double x) 
+        public static IList<decimal> Subtract(this IList<decimal> items, decimal x) 
         {
             ///<summary>
             ///subtract the given x elementwise from
             ///the extended IList
             ///</summary>
-            double[] output = new double[items.Count()];
+            decimal[] output = new decimal[items.Count()];
 
             for(int i = 0; i < items.Count(); i++)
             {
@@ -36,14 +36,14 @@ namespace Utils
         }
 
 
-        public static IList<double> Cap(this IList<double> items, double cap) 
+        public static IList<decimal> Cap(this IList<decimal> items, decimal cap) 
         {
             ///<summary>
             ///take each element of the array as the smaller
             ///of the cap and the element
             ///</summary>
 
-            double[] output = new double[items.Count()];
+            decimal[] output = new decimal[items.Count()];
 
             for(int i = 0; i < items.Count(); i++)
             {
@@ -53,8 +53,61 @@ namespace Utils
             return output;
         }
 
-        public static bool IsAlmostEqual(this IList<double> seqOne, 
-            IList<double> seqTwo, double tol = 0.00001)
+        public static SortedList<DateTime, decimal> PriceToReturns(
+            this SortedList<DateTime, decimal> items)
+        {
+            ///<summary>
+            ///turns a series of prices into a 
+            ///cumulative return series
+            ///</summary>
+
+            var output = new SortedList<DateTime, decimal>();
+            var enumerator = items.GetEnumerator();
+
+            bool keepGoing = enumerator.MoveNext();
+
+            if (!keepGoing) return output;
+
+            var prev = enumerator.Current.Value;
+            keepGoing = enumerator.MoveNext();
+
+            while (keepGoing)
+            {
+                decimal ret = enumerator.Current.Value / prev - 1;
+                output.Add(enumerator.Current.Key, ret);
+                prev = enumerator.Current.Value;
+                keepGoing = enumerator.MoveNext();
+            }
+
+            return output;
+        }
+
+        public static SortedList<DateTime, decimal> PriceToScaledCumulativeReturns(
+    this SortedList<DateTime, decimal> items, decimal scaling = 1)
+        {
+            ///<summary>
+            ///turns a series of prices into a 
+            ///cumulative return series
+            ///</summary>
+
+            var output = new SortedList<DateTime, decimal>();
+            var enumerator = items.GetEnumerator();
+
+            bool keepGoing = enumerator.MoveNext();
+
+            while (keepGoing)
+            {
+                decimal ret = enumerator.Current.Value / items.First().Value - 1;
+                ret *= scaling;
+                output.Add(enumerator.Current.Key, ret);
+                keepGoing = enumerator.MoveNext();
+            }
+
+            return output;
+        }
+
+        public static bool IsAlmostEqual(this IList<decimal> seqOne, 
+            IList<decimal> seqTwo, decimal tol = 0.00001m)
         {
             if (seqOne.Count() != seqTwo.Count()) return false;
 

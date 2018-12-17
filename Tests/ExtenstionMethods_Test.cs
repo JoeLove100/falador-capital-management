@@ -16,15 +16,15 @@ namespace Tests
         public void Subtract_SubtractZero_NoChange()
         {
             //arrange
-            List<double> testList = new List<double>() { 1, 2, 3, 4 };
-            List<double> expectedList = new List<double>() { 1, 2, 3, 4 };
+            List<decimal> testList = new List<decimal>() { 1, 2, 3, 4 };
+            List<decimal> expectedList = new List<decimal>() { 1, 2, 3, 4 };
 
-            double[] testArray = new double[] { 1.4, 2.4, 5.3, 1.1 };
-            double[] expectedArray = new double[] { 1.4, 2.4, 5.3, 1.1 };
+            decimal[] testArray = new decimal[] { 1.4m, 2.4m, 5.3m, 1.1m };
+            decimal[] expectedArray = new decimal[] { 1.4m, 2.4m, 5.3m, 1.1m };
 
             //act
-            List<double> subtractedList = (List<double>) testList.Subtract(0);
-            double[] subtractedArray = (double[]) testArray.Subtract(0);
+            List<decimal> subtractedList = (List<decimal>) testList.Subtract(0);
+            decimal[] subtractedArray = (decimal[]) testArray.Subtract(0);
 
             //asssert
             CollectionAssert.AreEqual(subtractedList, expectedList);
@@ -35,15 +35,15 @@ namespace Tests
         public void Subtract_SubtractPositive_TakeAway()
         {
             //arrange
-            List<double> testList = new List<double>() { 1, 2, 3, 4 };
-            List<double> expectedList = new List<double>() { -1, 0, 1, 2 };
+            List<decimal> testList = new List<decimal>() { 1, 2, 3, 4 };
+            List<decimal> expectedList = new List<decimal>() { -1, 0, 1, 2 };
 
-            double[] testArray = new double[] { 1.4, 2.4, 5.3, 1.1 };
-            double[] expectedArray = new double[] { -0.6, 0.4, 3.3, -0.9 };
+            decimal[] testArray = new decimal[] { 1.4m, 2.4m, 5.3m, 1.1m };
+            decimal[] expectedArray = new decimal[] { -0.6m, 0.4m, 3.3m, -0.9m };
 
             //act
-            List<double> subtractedList = (List<double>) testList.Subtract(2);
-            double[] subtractedArray = (double[]) testArray.Subtract(2);
+            List<decimal> subtractedList = (List<decimal>) testList.Subtract(2);
+            decimal[] subtractedArray = (decimal[]) testArray.Subtract(2);
 
             //asssert
             Assert.IsTrue(subtractedList.IsAlmostEqual(expectedList));
@@ -54,15 +54,15 @@ namespace Tests
         public void Subtract_SubtractNegative_AddOn()
         {
             //arrange
-            List<double> testList = new List<double>() { 1, 2, 3, 4 };
-            List<double> expectedList = new List<double>() { 2.5, 3.5, 4.5, 5.5 };
+            List<decimal> testList = new List<decimal>() { 1, 2, 3, 4 };
+            List<decimal> expectedList = new List<decimal>() { 2.5m, 3.5m, 4.5m, 5.5m };
 
-            double[] testArray = new double[] { 1.4, 2.4, 5.3, 1.1 };
-            double[] expectedArray = new double[] { 2.9, 3.9, 6.8, 2.6 };
+            decimal[] testArray = new decimal[] { 1.4m, 2.4m, 5.3m, 1.1m };
+            decimal[] expectedArray = new decimal[] { 2.9m, 3.9m, 6.8m, 2.6m };
 
             //act
-            List<double> subtractedList = (List<double>) testList.Subtract(-1.5);
-            double[] subtractedArray = (double[]) testArray.Subtract(-1.5);
+            List<decimal> subtractedList = (List<decimal>) testList.Subtract(-1.5m);
+            decimal[] subtractedArray = (decimal[]) testArray.Subtract(-1.5m);
 
             //asssert
             Assert.IsTrue(subtractedList.IsAlmostEqual(expectedList));
@@ -73,15 +73,15 @@ namespace Tests
         public void Cap_Positive_CapsValues()
         {
             //arrange
-            List<double> testList = new List<double>() { 1, 2, 3, 4 };
-            List<double> expectedList = new List<double>() { 1, 2, 3, 3 };
+            List<decimal> testList = new List<decimal>() { 1, 2, 3, 4 };
+            List<decimal> expectedList = new List<decimal>() { 1, 2, 3, 3 };
 
-            double[] testArray = new double[] { 1.4, 2.4, 5.3, 1.1 };
-            double[] expectedArray = new double[] { 1.4, 2.1, 2.1, 1.1 };
+            decimal[] testArray = new decimal[] { 1.4m, 2.4m, 5.3m, 1.1m };
+            decimal[] expectedArray = new decimal[] { 1.4m, 2.1m, 2.1m, 1.1m };
 
             //act
-            List<double> cappedList = (List<double>) testList.Cap(3);
-            double[] cappedArray = (double[]) testArray.Cap(2.1);
+            List<decimal> cappedList = (List<decimal>) testList.Cap(3);
+            decimal[] cappedArray = (decimal[]) testArray.Cap(2.1m);
 
             //asssert
             Assert.IsTrue(cappedList.IsAlmostEqual(expectedList));
@@ -92,19 +92,45 @@ namespace Tests
         public void Cap_Negative_CapsValues()
         {
             //arrange
-            List<double> testList = new List<double>() { -1, -2, -3, -4 };
-            List<double> expectedList = new List<double>() { -2, -2, -3, -4 };
+            List<decimal> testList = new List<decimal>() { -1, -2, -3, -4 };
+            List<decimal> expectedList = new List<decimal>() { -2, -2, -3, -4 };
 
-            double[] testArray = new double[] { -1.4, -2.4, -5.3, -1.1 };
-            double[] expectedArray = new double[] {-1.4, -2.4, -5.3, -1.1 };
+            decimal[] testArray = new decimal[] { -1.4m, -2.4m, -5.3m, -1.1m };
+            decimal[] expectedArray = new decimal[] {-1.4m, -2.4m, -5.3m, -1.1m };
 
             //act
-            List<double> cappedList = (List<double>) testList.Cap(-2);
-            double[] cappedArray = (double[]) testArray.Cap(-1);
+            List<decimal> cappedList = (List<decimal>) testList.Cap(-2);
+            decimal[] cappedArray = (decimal[]) testArray.Cap(-1);
 
             //asssert
             Assert.IsTrue(cappedList.IsAlmostEqual(expectedList));
             Assert.IsTrue(cappedArray.IsAlmostEqual(expectedArray));
+        }
+
+        [TestMethod()]
+        public void PriceToReturn_Prices_YieldsCorrectReturns()
+        {
+            //arrange
+            DateTime startDate = new DateTime(2018, 1, 1);
+            DateTime endDate = new DateTime(2018, 1, 4);
+            List<DateTime> dates = 
+                (List<DateTime>) DateRange.GetDaysBetween(startDate, endDate);
+
+            var testPrices = new SortedList<DateTime, decimal>();
+            var expectedReturns = new SortedList<DateTime, decimal>();
+
+            for(int i = 0; i < 4;  i++)
+            {
+                testPrices.Add(dates[i], (decimal) Math.Pow(1.02, i));
+                expectedReturns.Add(dates[i], (decimal)Math.Pow(1.02, i) - 1);
+            }
+
+            //act 
+            var result = testPrices.PriceToReturns();
+            Assert.IsTrue(result.Values.IsAlmostEqual(expectedReturns.Values));
+            //assert 
+
+
         }
     }
 }
