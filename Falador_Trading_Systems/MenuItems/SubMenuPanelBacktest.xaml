@@ -6,19 +6,32 @@
              xmlns:local="clr-namespace:FaladorTradingSystems" 
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="100">
-    <Grid Background="Red">
+    <Grid Background="LightBlue"
+          HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height = "*"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Orientation="Vertical" Grid.Column="0" 
-                   Grid.Row="0">
-            <Button Margin="3" Name="ButtonStrategy"></Button>
-            <Button Margin="3" Name="ButtonDates"></Button>
-            <Button Margin="3" Name="ButtonUnivers"></Button>
-        </WrapPanel>
+        <Button Margin="3" Name="ButtonDates"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch">
+            Edit dates
+            </Button>
+            <Button Margin="3" Name="ButtonAssets"
+                    Grid.Row="3">
+                Edit asset universe
+            </Button>
+            <Button Margin="3" Name="ButtonStrategy"
+                    Grid.Row="4">
+                Edit strategy type
+            </Button>
     </Grid>
 </local:ObservableControl>

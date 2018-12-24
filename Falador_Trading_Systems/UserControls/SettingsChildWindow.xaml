@@ -1,0 +1,48 @@
+﻿<metro:ChildWindow x:Class="FaladorTradingSystems.UserControls.SettingsChildWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FaladorTradingSystems.UserControls"
+        xmlns:metro="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+        mc:Ignorable="d"
+        Title="SettingsChildWindow" Height="450" Width="800"
+                   IsOpen="True" ShowCloseButton="False"
+                   AllowMove="True">
+
+    <metro:ChildWindow.OverlayBrush>
+        <SolidColorBrush Opacity="0.3" Color="{StaticResource Gray2}" />
+    </metro:ChildWindow.OverlayBrush>
+    
+    <Grid Height="{Binding ControlHeight}" Width="{Binding ControlLength}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="1" Grid.Column="1"
+                Name="ButtonOK">
+            OK
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="3"
+                Name="ButtonCancel">
+            Cancel
+        </Button>
+
+        <ContentControl Grid.Row="0" Grid.Column="0"
+                        Grid.ColumnSpan="5"
+                        Name="MainHolder">
+            
+        </ContentControl>
+    </Grid>
+</metro:ChildWindow>

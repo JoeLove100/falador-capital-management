@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-131890058226
+135667583
 
-17-646965162
-312142479936
-App.xaml;MenuItems\SubMenuPanelBacktest.xaml;MenuItems\SubMenuPanelHistoric.xaml;MenuItems\SubMenuPanelNewsfeed.xaml;MenuItems\SubMenuPanelPortfolio.xaml;UserControls\DateRangeBar.xaml;Views\BacktestingPanel.xaml;Views\LineChartPanel.xaml;FaladorTradingSystems.xaml;MenuItems\MainMenuBar.xaml;MenuItems\SubMenuPanel.xaml;Views\NewsfeedPanel.xaml;Views\PortfolioManagementPanel.xaml;
+2129892587
+32369207911
+App.xaml;MenuItems\SubMenuPanelBacktest.xaml;MenuItems\SubMenuPanelHistoric.xaml;MenuItems\SubMenuPanelNewsfeed.xaml;MenuItems\SubMenuPanelPortfolio.xaml;UserControls\DateRangeBar.xaml;UserControls\WindowDateRange.xaml;Views\BacktestingPanel.xaml;Views\LineChartPanel.xaml;FaladorTradingSystems.xaml;MenuItems\MainMenuBar.xaml;Views\NewsfeedPanel.xaml;Views\PortfolioManagementPanel.xaml;
 
 True
 

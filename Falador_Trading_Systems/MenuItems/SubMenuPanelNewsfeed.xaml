@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FaladorTradingSystems.MenuItems"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="100">
-    <Grid>
+    <Grid Background="LightBlue">
             
     </Grid>
 </UserControl>

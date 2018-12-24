@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllAssets.cs" />
     <Compile Include="AssetDataSeries.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MarketData.cs" />

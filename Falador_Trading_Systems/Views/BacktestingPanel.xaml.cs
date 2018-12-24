@@ -32,6 +32,7 @@ namespace FaladorTradingSystems.Views
         {
             BacktestingEngine = engine;
             InitializeComponent();
+            DataContext = this;
             Series = new SeriesCollection();
             AddEventHandlers();
         }

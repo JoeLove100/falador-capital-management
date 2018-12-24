@@ -39,23 +39,19 @@
 
         <ContentControl Grid.Column="1" Grid.Row="1"
                         Name = "ContentControlMain"
-                        Content= "{Binding}"
                         Margin="3,3,3,3">
         </ContentControl>
 
-        <ContentControl Grid.Column="0" Grid.Row="2"
-                        Grid.RowSpan="2"
+        <ContentControl Grid.Column="0" Grid.Row="0"
+                        Grid.RowSpan="3"
                         Name= "ContentControlSubMenu"
                         Content= "{Binding SubMenuItem}">
-            
-            
         </ContentControl>
         
 
         <menus:MainMenuBar Grid.Column="1" Grid.Row="0"
                            Grid.ColumnSpan="2" Margin="0,0,0,0"
                            x:Name ="MenuItemMain">
-
         </menus:MainMenuBar>
 
          

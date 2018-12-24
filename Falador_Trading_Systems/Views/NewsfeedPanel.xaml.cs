@@ -18,7 +18,7 @@ namespace FaladorTradingSystems.Views
     /// <summary>
     /// Interaction logic for NewsfeedPanel.xaml
     /// </summary>
-    public partial class NewsfeedPanel : UserControl
+    public partial class NewsfeedPanel : ObservableControl
     {
         public NewsfeedPanel()
         {

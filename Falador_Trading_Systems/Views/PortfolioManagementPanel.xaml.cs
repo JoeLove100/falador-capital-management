@@ -18,7 +18,7 @@ namespace FaladorTradingSystems.Views
     /// <summary>
     /// Interaction logic for PortfolioManagementPanel.xaml
     /// </summary>
-    public partial class PortfolioManagementPanel : UserControl
+    public partial class PortfolioManagementPanel : ObservableControl
     {
         public PortfolioManagementPanel()
         {

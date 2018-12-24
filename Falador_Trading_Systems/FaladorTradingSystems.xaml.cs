@@ -1,22 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FaladorTradingSystems;
-using Utils;
-using MahApps.Metro.Controls;
+﻿using FaladorTradingSystems.MenuItems;
 using FaladorTradingSystems.Views;
-using FaladorTradingSystems.MenuItems;
+using MahApps.Metro.Controls;
 
 namespace FaladorTradingSystems
 {
@@ -31,7 +15,8 @@ namespace FaladorTradingSystems
         {
             InitializeComponent();
             Engine = new ModelEngine();
-            InitialiseViews();
+            InitialiseControls();
+            DataContext = this;
             AddEventHandlers();
         }
 
@@ -41,19 +26,29 @@ namespace FaladorTradingSystems
 
         protected ModelEngine Engine;
 
+        // panel items
         protected LineChartPanel ChartPanelAssetPrice;
         protected BacktestingPanel ChartPanelBacktesting;
         protected NewsfeedPanel ChartPanelNewsfeed;
         protected PortfolioManagementPanel ChartPanelPortfolio;
 
+        // sub menu items
+        protected SubMenuPanelBacktest SubMenuBacktest;
+        protected SubMenuPanelHistoric SubMenuHistoric;
+        protected SubMenuPanelNewsfeed SubMenuNewsfeed;
+        protected SubMenuPanelPortfolio SubMenuPortfolio;
+
         protected SubMenuPanelBacktest SubMenuItem;
+        protected ObservableControl MainPanel;
 
         #endregion
 
         #region methods
 
-        protected void InitialiseViews()
+        protected void InitialiseControls()
         {
+            // initialise main panels
+
             ChartPanelAssetPrice = new LineChartPanel();
             ChartPanelAssetPrice.InitialiseChart(Engine.MarketData);
             ChartPanelAssetPrice.PlotLineChart();
@@ -61,6 +56,14 @@ namespace FaladorTradingSystems
             ChartPanelBacktesting = new BacktestingPanel(Engine.BacktestingEngine);
             ChartPanelNewsfeed = new NewsfeedPanel();
             ChartPanelPortfolio = new PortfolioManagementPanel();
+
+            // initialise the sub menu panels
+
+            SubMenuHistoric = new SubMenuPanelHistoric();
+            SubMenuBacktest = new SubMenuPanelBacktest();
+            SubMenuNewsfeed = new SubMenuPanelNewsfeed();
+            SubMenuPortfolio = new SubMenuPanelPortfolio();
+        
         }
 
 
@@ -76,20 +79,23 @@ namespace FaladorTradingSystems
         private void ChangeView(object sender, AssumptionChangedEventArgs e)
         {
             ViewType viewType = MenuItemMain.GetSelectedView();
-            SubMenuItem = new SubMenuPanelBacktest();
             switch (viewType)
             {
                 case ViewType.AssetPrice:
-                    DataContext = ChartPanelAssetPrice;
+                    ContentControlMain.Content = ChartPanelAssetPrice;
+                    ContentControlSubMenu.Content = SubMenuHistoric;
                     break;
                 case ViewType.Backtest:
-                    DataContext = ChartPanelBacktesting;
+                    ContentControlMain.Content = ChartPanelBacktesting;
+                    ContentControlSubMenu.Content = SubMenuBacktest;
                     break;
                 case ViewType.News:
-                    DataContext = ChartPanelNewsfeed;
+                    MainPanel = ChartPanelNewsfeed;
+                    ContentControlSubMenu.Content = SubMenuNewsfeed;
                     break;
                 case ViewType.Portfolio:
-                    DataContext = ChartPanelPortfolio;
+                    MainPanel = ChartPanelPortfolio;
+                    ContentControlSubMenu.Content = SubMenuPortfolio;
                     break;
             }
         }

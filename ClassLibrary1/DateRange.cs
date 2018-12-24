@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Utils
 {
 
-    public class DateRange
+    public class DateRange : IIsSameAs
     {
 
         #region constructor
@@ -27,7 +27,27 @@ namespace Utils
 
         #endregion
 
-                
+        #region public methods
+
+        public bool IsSameAs(IIsSameAs comparison)
+        {
+            DateRange comparator = comparison as DateRange;
+            if (comparator is null) return false;
+
+            if (comparator.Start != Start) return false;
+            if (comparator.End != End) return false;
+
+            return true;
+        }
+
+        public DateRange Clone()
+        {
+            return new DateRange(Start, End);
+        }
+
+        #endregion
+
+
         #region  static methods
 
         public static IEnumerable<DateTime> GetDaysBetween(DateTime start, DateTime end)
@@ -160,7 +180,7 @@ namespace Utils
             return yearEnd;
         }
 
-        #endregion 
+        #endregion
 
     }
 
