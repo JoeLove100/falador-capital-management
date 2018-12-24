@@ -16,5 +16,11 @@ namespace FaladorTradingSystems
     {
         internal static string DataFileLocation =>
             @"C:\Users\joelo\code\runescape\data_cache\full_data.csv";
+
+        internal static string TwitterAPI =>
+            @"twitter_api_key";
+
+        internal static string TwitterSecret =>
+            @"twitter_secret";
     }
 }
