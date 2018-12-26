@@ -205,10 +205,10 @@
     <Compile Include="UserControls\StrategySettingsControl.xaml.cs">
       <DependentUpon>StrategySettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewsfeedPanel.xaml.cs">
+    <Compile Include="Panels\NewsfeedPanel.xaml.cs">
       <DependentUpon>NewsfeedPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PortfolioManagementPanel.xaml.cs">
+    <Compile Include="Panels\PortfolioManagementPanel.xaml.cs">
       <DependentUpon>PortfolioManagementPanel.xaml</DependentUpon>
     </Compile>
     <Page Include="App.xaml">
@@ -251,11 +251,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BacktestingPanel.xaml">
+    <Page Include="Panels\BacktestingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LineChartPanel.xaml">
+    <Page Include="Panels\LineChartPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,10 +270,10 @@
     <Compile Include="UserControls\DateRangeBar.xaml.cs">
       <DependentUpon>DateRangeBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BacktestingPanel.xaml.cs">
+    <Compile Include="Panels\BacktestingPanel.xaml.cs">
       <DependentUpon>BacktestingPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LineChartPanel.xaml.cs">
+    <Compile Include="Panels\LineChartPanel.xaml.cs">
       <DependentUpon>LineChartPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="FaladorTradingSystems.xaml.cs">
@@ -284,11 +284,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewsfeedPanel.xaml">
+    <Page Include="Panels\NewsfeedPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PortfolioManagementPanel.xaml">
+    <Page Include="Panels\PortfolioManagementPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,6 +23,7 @@ namespace FaladorTradingSystems.Views
         public NewsfeedPanel()
         {
             InitializeComponent();
+            DataContext = this;
         }
     }
 }

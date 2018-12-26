@@ -90,11 +90,11 @@ namespace FaladorTradingSystems
                     ContentControlSubMenu.Content = SubMenuBacktest;
                     break;
                 case ViewType.News:
-                    MainPanel = ChartPanelNewsfeed;
+                    ContentControlMain.Content = ChartPanelNewsfeed;
                     ContentControlSubMenu.Content = SubMenuNewsfeed;
                     break;
                 case ViewType.Portfolio:
-                    MainPanel = ChartPanelPortfolio;
+                    ContentControlMain.Content = ChartPanelPortfolio;
                     ContentControlSubMenu.Content = SubMenuPortfolio;
                     break;
             }
